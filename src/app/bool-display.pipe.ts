@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'boolDisplay'
+  name: 'boolYN'
 })
 export class BoolDisplayPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(value: boolean): string {
+    return (value)?"Y":"N";
   }
 
 }

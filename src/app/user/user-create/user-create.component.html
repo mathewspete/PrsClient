@@ -1,1 +1,53 @@
-<p>user-create works!</p>
+<app-menu></app-menu>
+<main>
+    <div class="container">
+        <div>
+            <h3>User Create</h3>
+        </div>
+        <div>
+            <table class="table table-sm create table-stripe table-hover" *ngIf="user">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <td><input [(ngModel)]="user.username" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th>Password</th>
+                        <td><input [(ngModel)]="user.password" type="password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>First Name</th>
+                        <td><input [(ngModel)]="user.firstname" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Last Name</th>
+                        <td><input [(ngModel)]="user.lastname" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td><input [(ngModel)]="user.email" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th>Phone</th>
+                        <td><input [(ngModel)]="user.phone" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th>Reviewer</th>
+                        <td><input [(ngModel)]="user.isReviewer" type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <th>Admin</th>
+                        <td><input [(ngModel)]="user.isAdmin" type="checkbox"></td>
+                    </tr>
+                </thead>
+            </table>
+            <div class="flex">
+                <span>
+                    <button (click)="save()" class="btn btn-primary float-right">Save</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</main>

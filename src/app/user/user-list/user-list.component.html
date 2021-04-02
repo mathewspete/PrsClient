@@ -1,1 +1,36 @@
-<p>user-list works!</p>
+<app-menu></app-menu>
+<main>
+    <div class="container">
+        <span class="search"><input type="text" placeholder="Search"></span>
+        <h3>User List</h3>
+        <span><a routerLink="/user/create"> Create </a></span>
+        <table class="table table-sm table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Fullname</th>
+                    <th>Email</th>
+                    <th>Reviewer</th>
+                    <th>Admin</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{user.id}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.firstname}} {{user.lastname}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.isReviewer | boolYN}}</td>
+                    <td>{{user.isAdmin | boolYN}}</td>
+                    <td>
+                        <a routerLink="/user/edit/{{user.id}}">Edit</a>
+                        <span> | </span>
+                        <a routerLink="/user/detail/{{user.id}}">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>

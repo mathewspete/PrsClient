@@ -1,1 +1,17 @@
-<p>user-login works!</p>
+<div>
+    <div>
+        <span>Login</span>
+        <div>
+            <span>Username</span>
+            <span><input [(ngModel)]="user.username" type="text"></span>
+        </div>
+        <div>
+            <span>Password</span>
+            <span><input [(ngModel)]="user.password" type="password"></span>
+        </div>
+        <span>
+            <button (click)="login()" class="btn btn-primary">Sumbit</button>
+            <!-- {{message}} --> 
+        </span>
+    </div>
+</div>

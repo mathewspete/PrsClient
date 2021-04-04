@@ -1,9 +1,9 @@
 <app-menu></app-menu>
 <main>
     <div class="container">
-        <span class="search"><input type="text" placeholder="Search"></span>
         <h3>User List</h3>
         <span><a routerLink="/user/create"> Create </a></span>
+        <span class="search"><input [(ngModel)]="searchCriteria" type="text" placeholder="Search"></span>
         <table class="table table-sm table-striped table-hover">
             <thead>
                 <tr>
@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user of users">
+                <tr *ngFor="let user of users | searchUser: searchCriteria">
                     <td>{{user.id}}</td>
                     <td>{{user.username}}</td>
                     <td>{{user.firstname}} {{user.lastname}}</td>

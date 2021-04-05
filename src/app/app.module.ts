@@ -17,6 +17,11 @@ import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { HelpComponent } from './help/help.component';
 import { MenuComponent } from './menu/menu.component';
+import { VendorCreateComponent } from './vendor/create/create.component';
+import { VendorDetailComponent } from './vendor/detail/detail.component';
+import { VendorEditComponent } from './vendor/edit/edit.component';
+import { VendorListComponent } from './vendor/list/list.component';
+import { SearchVendorPipe } from './search-vendor.pipe';
 
 @NgModule({
   declarations: [
@@ -32,7 +37,12 @@ import { MenuComponent } from './menu/menu.component';
     AboutComponent,
     HomeComponent,
     HelpComponent,
-    MenuComponent
+    MenuComponent,
+    VendorCreateComponent,
+    VendorDetailComponent,
+    VendorEditComponent,
+    VendorListComponent,
+    SearchVendorPipe
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,42 @@
+<app-menu></app-menu>
+<main>
+    <div class="container">
+        <h3>Vendor List</h3>
+        <span><a routerLink="/vendor/create"> Create </a></span>
+        <span class="search"><input [(ngModel)]="searchCriteria" type="text" placeholder="Search"></span>
+        <table class="table table-sm table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let vendor of vendors | searchVendor: searchCriteria">
+                    <td>{{vendor.id}}</td>
+                    <td>{{vendor.code}}</td>
+                    <td>{{vendor.name}}</td>
+                    <td>{{vendor.address}}</td>
+                    <td>{{vendor.city}}</td>
+                    <td>{{vendor.state}}</td>
+                    <td>{{vendor.zip}}</td>
+                    <td><a href="tel:{{vendor.phone}}">{{vendor.phone}}</a></td>
+                    <td><a href="mailto:{{vendor.email}}">{{vendor.email}}</a></td>
+                    <td>
+                        <a routerLink="/vendor/edit/{{vendor.id}}">Edit</a>
+                        <span> | </span>
+                        <a routerLink="/vendor/detail/{{vendor.id}}">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>

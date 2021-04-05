@@ -1,17 +1,16 @@
-<div>
-    <div>
-        <span>Login</span>
-        <div>
-            <span>Username</span>
-            <span><input [(ngModel)]="user.username" type="text"></span>
-        </div>
-        <div>
-            <span>Password</span>
-            <span><input [(ngModel)]="user.password" type="password"></span>
-        </div>
-        <span>
-            <button (click)="login()" class="btn btn-primary">Sumbit</button>
-            <!-- {{message}} --> 
-        </span>
+<div class="form-login">
+  <form>
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+    
+    <div class="form-floating">
+      <input [(ngModel)]="user.username" type="text" class="form-control" id="floatingInput" placeholder="Username">
+      <label for="floatingInput">Username</label>
     </div>
+    <div class="form-floating">
+      <input [(ngModel)]="user.password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
+    
+    <button class="w-100 btn btn-lg btn-primary" (click)="login()">Login</button>
+  </form>
 </div>

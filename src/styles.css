@@ -9,7 +9,9 @@ main {
 .navbar-dark .navbar-nav .nav-link {
     color: rgba(255,255,255,.50);
 }
-
+.navbar-nav {
+    margin-right: auto;
+}
 span.search {
     float: right;
 }
@@ -24,4 +26,8 @@ span.search {
 
 input {
     border-radius: 8px;
+}
+
+.form-floating:last-of-type {
+    margin: 0 0 1rem 0;
 }

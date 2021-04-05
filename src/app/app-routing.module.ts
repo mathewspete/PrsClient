@@ -8,6 +8,10 @@ import { UserDetailComponent } from './user/user-detail/user-detail.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserLoginComponent } from './user/user-login/user-login.component';
+import { VendorCreateComponent } from './vendor/create/create.component';
+import { VendorDetailComponent } from './vendor/detail/detail.component';
+import { VendorEditComponent } from './vendor/edit/edit.component';
+import { VendorListComponent } from './vendor/list/list.component';
 
 const routes: Routes = [
   {path: '',redirectTo: '/', pathMatch: 'full'},
@@ -15,11 +19,15 @@ const routes: Routes = [
   {path: 'about', component: AboutComponent },
   {path: 'help', component: HelpComponent },
 
-  {path: 'user/list', component: UserListComponent},
+  {path: 'login', component: UserLoginComponent},
   {path: 'user/detail/:id', component: UserDetailComponent},
   {path: 'user/create', component: UserCreateComponent},
   {path: 'user/edit/:id', component: UserEditComponent},
-  {path: 'login', component: UserLoginComponent},
+  {path: 'user/list', component: UserListComponent},
+  {path: 'vendor/detail/:id', component: VendorDetailComponent},
+  {path: 'vendor/create', component: VendorCreateComponent},
+  {path: 'vendor/edit/:id', component: VendorEditComponent},
+  {path: 'vendor/list', component: VendorListComponent},
   
 
 

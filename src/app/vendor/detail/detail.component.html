@@ -1,0 +1,64 @@
+<app-menu></app-menu>
+<main>
+    <div class="container">
+        <div>
+            <h3>Vendor Detail</h3>
+        </div>
+        <div>
+            <table class="table table-sm  table-stripe table-hover" *ngIf="vendor">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <td><input [(ngModel)]="vendor.id" type="text" disabled></td>
+                    </tr>
+                    <tr>
+                        <th>code</th>
+                        <td><input [(ngModel)]="vendor.code" type="text" disabled></td>
+                    </tr>
+                    <tr>
+                        <th>name</th>
+                        <td><input [(ngModel)]="vendor.name" type="password" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>address</th>
+                        <td><input [(ngModel)]="vendor.address" type="text" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>city</th>
+                        <td><input [(ngModel)]="vendor.city" type="text" disabled></td>
+                    </tr>
+                    <tr>
+                        <th>state</th>
+                        <td><input [(ngModel)]="vendor.state" type="text" disabled></td>
+                    </tr>
+                    <tr>
+                        <th>zip</th>
+                        <td><input [(ngModel)]="vendor.zip" type="text" disabled></td>
+                    </tr>
+                    <tr>
+                        <th>phone</th>
+                        <td><input [(ngModel)]="vendor.phone" type="text" disabled></td>
+                    </tr>
+                    <tr>
+                        <th>email</th>
+                        <td><input [(ngModel)]="vendor.email" type="text" disabled></td>
+                    </tr>
+                </thead>
+            </table>
+            <div class="flex">
+
+                <span *ngIf="!showVerify">
+                    <button (click)="toggleVerify()" class="btn btn-danger">Delete</button>
+                </span>
+                <span *ngIf="!showVerify">
+                    <button (click)="edit()" class="btn btn-warning float-right">Edit</button>
+                </span>
+                <span *ngIf="showVerify">
+                    <button (click)="delete()" class="btn btn-danger float-right">Confirm Delete</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</main>

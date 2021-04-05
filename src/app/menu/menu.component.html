@@ -1,20 +1,24 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#">Purchase Request System</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menuDefault" aria-controls="menuDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/home">Purchase Request System</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="menuDefault">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item" *ngFor="let menu of menus">
-                    <a class="nav-link" routerLink="{{menu.route}}">{{menu.display}}<span class="sr-only"></span></a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto mb-2 mb-sm-0">
+        <li class="nav-item" *ngFor="let menu of menus">
+          <a class="nav-link" routerLink="{{menu.route}}">{{menu.display}}<span class="sr-only"></span></a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" routerLink="/login">Login</button>
+      </form>
     </div>
+  </div>
 </nav>
+
 
 <!--Navbar --
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-primary" [containerInside]="false">

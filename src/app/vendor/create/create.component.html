@@ -1,0 +1,57 @@
+<app-menu></app-menu>
+<main>
+    <div class="container">
+        <div>
+            <h3>New Vendor</h3>
+        </div>
+        <div>
+            <table class="table table-sm  table-stripe table-hover" *ngIf="vendor">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <td><input [(ngModel)]="vendor.id" type="text" disabled></td>
+                    </tr>
+                    <tr>
+                        <th>code</th>
+                        <td><input [(ngModel)]="vendor.code" type="text" ></td>
+                    </tr>
+                    <tr>
+                        <th>name</th>
+                        <td><input [(ngModel)]="vendor.name" type="password" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>address</th>
+                        <td><input [(ngModel)]="vendor.address" type="text" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>city</th>
+                        <td><input [(ngModel)]="vendor.city" type="text" ></td>
+                    </tr>
+                    <tr>
+                        <th>state</th>
+                        <td><input [(ngModel)]="vendor.state" type="text" ></td>
+                    </tr>
+                    <tr>
+                        <th>zip</th>
+                        <td><input [(ngModel)]="vendor.zip" type="text" ></td>
+                    </tr>
+                    <tr>
+                        <th>phone</th>
+                        <td><input [(ngModel)]="vendor.phone" type="text" ></td>
+                    </tr>
+                    <tr>
+                        <th>email</th>
+                        <td><input [(ngModel)]="vendor.email" type="text" ></td>
+                    </tr>
+                </thead>
+            </table>
+            <div class="flex">
+                <span>
+                    <button (click)="save()" class="btn btn-warning float-right">Save</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</main>

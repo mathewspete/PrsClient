@@ -27,6 +27,17 @@ import { ProductDetailComponent } from './product/detail/detail.component';
 import { ProductEditComponent } from './product/edit/edit.component';
 import { ProductListComponent } from './product/list/list.component';
 import { SearchProductPipe } from './search-product.pipe';
+import { RequestCreateComponent } from './request/create/create.component';
+import { RequestlineCreateComponent } from './requestline/create/create.component';
+import { RequestDetailComponent } from './request/detail/detail.component';
+import { RequestlineDetailComponent } from './requestline/detail/detail.component';
+import { RequestEditComponent } from './request/edit/edit.component';
+import { RequestlineEditComponent } from './requestline/edit/edit.component';
+import { RequestListComponent } from './request/list/list.component';
+import { RequestlineListComponent } from './requestline/list/list.component';
+import { SearchRequestPipe } from './search-request.pipe';
+import { SearchRequestlinePipe } from './search-requestline.pipe';
+import { RequestLineComponent } from './request/line/line.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +63,18 @@ import { SearchProductPipe } from './search-product.pipe';
     ProductDetailComponent,
     ProductEditComponent,
     ProductListComponent,
-    SearchProductPipe
+    SearchProductPipe,
+    RequestCreateComponent,
+    RequestlineCreateComponent,
+    RequestDetailComponent,
+    RequestlineDetailComponent,
+    RequestEditComponent,
+    RequestlineEditComponent,
+    RequestListComponent,
+    RequestlineListComponent,
+    SearchRequestPipe,
+    SearchRequestlinePipe,
+    RequestLineComponent
   ],
   imports: [
     BrowserModule,

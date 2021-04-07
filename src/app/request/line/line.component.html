@@ -1,0 +1,65 @@
+<app-menu></app-menu>
+<main>
+    <div class="container">
+        <h3>Request</h3>
+        <table class="table table-sm table-striped table-hover"  *ngIf="request">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Description</th>
+                    <th>Rejection Reason</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th>User</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{request.id}}</td>
+                    <td>{{request.description}}</td>
+                    <input [(ngModel)]="request.rejectionReason" type="text" class="form-control form-control-dark w-100" id="reason" readonly>
+                    <td>{{request.status}}</td>
+                    <td>${{request.total}}</td>
+                    <td>{{request.user.username}}</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <button type="button" class="btn btn-success btn-sm" (click)="approve()">Approve</button>
+                            <button type="button" class="btn btn-warning btn-sm" (click)="review()">Review</button>
+                            <button type="button" class="btn btn-danger btn-sm" (click)="reject()">Reject</button>
+                      </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Items</h3>
+        <span><a routerLink="/requestline/create"> Create </a></span>
+        <table class="table table-sm table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Item</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--<tr *ngFor="let requestline of request.requestLine | searchRequestline: searchCriteria">-->
+                <tr *ngFor="let reqline of request.requestLine">
+                    <td>{{reqline.id}}</td>
+                    <td>{{reqline.product.name}}</td>
+                    <td>{{reqline.quantity}}</td>
+                    <td>${{reqline.product.price}}</td>
+                    <td>${{reqline.product.price * reqline.quantity}}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" routerLink="/requestline/edit/{{reqline.id}}">Edit</button>
+                        <span> | </span>
+                        <button (click)="deleteline(reqline)" class="btn btn-danger btn-sm">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>

@@ -7,6 +7,15 @@ import { ProductCreateComponent } from './product/create/create.component';
 import { ProductDetailComponent } from './product/detail/detail.component';
 import { ProductEditComponent } from './product/edit/edit.component';
 import { ProductListComponent } from './product/list/list.component';
+import { RequestCreateComponent } from './request/create/create.component';
+import { RequestDetailComponent } from './request/detail/detail.component';
+import { RequestEditComponent } from './request/edit/edit.component';
+import { RequestLineComponent } from './request/line/line.component';
+import { RequestListComponent } from './request/list/list.component';
+import { RequestlineCreateComponent } from './requestline/create/create.component';
+import { RequestlineDetailComponent } from './requestline/detail/detail.component';
+import { RequestlineEditComponent } from './requestline/edit/edit.component';
+import { RequestlineListComponent } from './requestline/list/list.component';
 import { UserCreateComponent } from './user/user-create/user-create.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
@@ -36,6 +45,15 @@ const routes: Routes = [
   {path: 'product/create', component: ProductCreateComponent},
   {path: 'product/edit/:id', component: ProductEditComponent},
   {path: 'product/list', component: ProductListComponent},
+  {path: 'request/detail/:id', component: RequestDetailComponent},
+  {path: 'request/create', component: RequestCreateComponent},
+  {path: 'request/edit/:id', component: RequestEditComponent},
+  {path: 'request/line/:id', component: RequestLineComponent},
+  {path: 'request/list', component: RequestListComponent},
+  {path: 'requestline/detail/:id', component: RequestlineDetailComponent},
+  {path: 'requestline/create', component: RequestlineCreateComponent},
+  {path: 'requestline/edit/:id', component: RequestlineEditComponent},
+  {path: 'requestline/list', component: RequestlineListComponent},
   
 
 

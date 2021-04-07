@@ -11,8 +11,9 @@ import { UserService } from '../user.service';
 })
 export class UserLoginComponent implements OnInit {
 
-  user: User = new User()
+  user: User = new User();
   id: number = 0;
+  sysUser: User;
 
   constructor(
     private sys: SystemService,
@@ -26,6 +27,8 @@ export class UserLoginComponent implements OnInit {
       res => {
         console.log("User:", res, "is logged in");
         this.sys.loggedInUser = res;
+        
+        //console.log("loggedInUser:", sys.loggedInUser);
       this.router.navigateByUrl("/user/list");
       },
       err => {

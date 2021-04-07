@@ -4,3 +4,8 @@
     padding: 15px;
     margin: auto;
 }
+
+.login {
+        height: calc(3.5rem + 2px);
+        padding: 1rem .75rem;
+}

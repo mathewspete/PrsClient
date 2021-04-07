@@ -1,0 +1,50 @@
+<app-menu></app-menu>
+<main>
+    <div class="container">
+        <div>
+            <h3>New Item Request</h3>
+        </div>
+        <div>
+            <table class="table table-sm  table-stripe table-hover" *ngIf="requestline">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <td><input [(ngModel)]="requestline.id" type="text" disabled></td>
+                    </tr>
+                    <tr>
+                        <th>Request</th>
+                        <td>
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example" [(ngModel)]="requestline.requestId">
+                                <option *ngFor="let request of requests" [ngValue]="request.id">{{request.id}} - {{request.description}}</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Item</th>
+                        <td>
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example" [(ngModel)]="requestline.productId">
+                                <option *ngFor="let product of products" [ngValue]="product.id">${{product.price}} - {{product.name}}</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Quantity</th>
+                        <td><input [(ngModel)]="requestline.quantity" type="number" >
+                        </td>
+                    </tr>
+                    <!--
+                    <tr>
+                        <th>Total</th>
+                        <td>${{requestline.product.price * requestline.quantity}}</td>
+                    </tr>
+                -->
+                </thead>
+            </table>
+            <div class="flex">
+                <span>
+                    <button (click)="save()" class="btn btn-warning float-right">Save</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</main>

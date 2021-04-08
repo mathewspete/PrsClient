@@ -19,9 +19,12 @@ export class RequestLineComponent implements OnInit {
   id: number = 0;
   showVerify: boolean = false;
   users: User[];
+  admin: boolean = false;
+  reviewer: boolean;
+  creator: boolean = false;
   
   constructor(
-    private syssrv: SystemService,
+    private syssvc: SystemService,
     private service: RequestService,
     private requestlinesvc: RequestlineService,
     private route: ActivatedRoute,
@@ -36,7 +39,9 @@ export class RequestLineComponent implements OnInit {
     this.requestlinesvc.delete(rl).subscribe(
       res => {
         console.warn(`Requestline ${rl.id} was deleted`);
-        this.router.navigateByUrl('/request/line');
+        location.reload();
+        //this.router.navigateByUrl(`/request/list`);
+        //this.router.navigateByUrl(`/request/line/${this.request.id}`);
       },
       err => {
         console.error(err);
@@ -45,22 +50,25 @@ export class RequestLineComponent implements OnInit {
   }
 
   review(): void {
-    this.syssrv.verifyLogin();
+    console.log("Request pre review:", this.request);
     this.service.review(this.request).subscribe(
       res => {
         console.warn(`Request #${this.request.id} review`);
+        console.warn(`Request review:`, this.request);
         this.router.navigateByUrl('/request/list');
       },
       err => {
         console.error(err);
       }
     )
+    
   }
 
   approve(): void {
+    console.log("Request pre approve:", this.request);
     this.service.approve(this.request).subscribe(
       res => {
-        console.warn(`Request #${this.request.id} approve`);
+        console.log(`Request #${this.request.id} approve`);
         this.router.navigateByUrl('/request/list');
       },
       err => {
@@ -70,6 +78,7 @@ export class RequestLineComponent implements OnInit {
   }
 
   reject(): void {
+    console.log("Request pre reject:", this.request);
     this.service.reject(this.request).subscribe(
       res => {
         console.warn(`Request #${this.request.id} rejected`);
@@ -82,7 +91,7 @@ export class RequestLineComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.syssrv.verifyLogin();
+    // this.syssvc.loggedInUser
     this.id = this.route.snapshot.params.id;
     this.requestlinesvc.list().subscribe(
       res => {
@@ -97,6 +106,8 @@ export class RequestLineComponent implements OnInit {
       res => {
         console.log("Request:", res);
         this.request = res;
+        this.creator = (this.syssvc.loggedInUser.id === this.request.userId);
+        this.admin = this.syssvc.isAdmin();
       },
       err => {
         console.error(err);

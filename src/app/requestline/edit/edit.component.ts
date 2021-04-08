@@ -33,7 +33,7 @@ export class RequestlineEditComponent implements OnInit {
       err => {
         console.error(err);
       }
-    )  
+    )
   }
   ngOnInit(): void {
     this.id = this.route.snapshot.params.id;

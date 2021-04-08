@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/product/product.class';
 import { ProductService } from 'src/app/product/product.service';
 import { Request } from 'src/app/request/request.class';
@@ -16,36 +16,18 @@ export class RequestlineCreateComponent implements OnInit {
 
   requestline: Requestline = new Requestline();
   products: Product[];
-  requests: Request[];
+  requestId: number;
 
   constructor(
     private requestlinesvc: RequestlineService,
-    private requestsvc: RequestService,
     private productsvc: ProductService,
+    private route: ActivatedRoute,
     private router: Router
   ) { }
 
   save(): void {
+    this.requestline.requestId = this.requestId;
     console.log("Before Create:", this.requestline);
-    this.productsvc.list().subscribe(
-      res => {
-        console.log("Products:", res);
-        this.products = res as Product[];
-      },
-      err => {
-        console.error(err)
-      }
-    );
-    this.requestsvc.list().subscribe(
-      res => {
-        console.log("Requests:", res);
-        this.requests = res as Request[];
-      },
-      err => {
-        console.error(err)
-      }
-    );
-    
     this.requestlinesvc.create(this.requestline).subscribe(
       res => {
         console.log(`Created Successfully`);
@@ -58,15 +40,8 @@ export class RequestlineCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.requestsvc.list().subscribe(
-      res => {
-        console.log("Requests:", res);
-        this.requests = res as Request[];
-      },
-      err => {
-        console.error(err)
-      }
-    );
+    this.requestId = +this.route.snapshot.params.rid;
+    console.log("reqId:", this.requestId);
     this.productsvc.list().subscribe(
       res => {
         console.log("Products:", res);

@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from "./user/user.class";
@@ -37,14 +36,16 @@ export class SystemService  {
       return this.loggedInUser.isReviewer
     }
   }
+
   isLoggedIn(): boolean {
-    if(this.loggedInUser === null){
-      return false;
-    }
+    return (this.loggedInUser === null)?false:true;
+  }
+
+  logout(): void {
+    this.loggedInUser = null;
   }
 
   constructor(
-    private http: HttpClient, 
     private router: Router
   ) { }
   

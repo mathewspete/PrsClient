@@ -6,5 +6,4 @@ export class Requestline {
     quantity: number = 0;
     productId: Number;
     product: Product;
-    productName: String = "";
 }

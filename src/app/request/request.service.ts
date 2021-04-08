@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { SystemService } from '../system.service';
+import { User } from '../user/user.class';
 import { Request } from './request.class';
 
 @Injectable({
@@ -12,9 +14,9 @@ export class RequestService {
 
 
 
-
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private syssvc: SystemService
   ) { }
 
   create(request: Request): Observable<Request>{
@@ -32,6 +34,9 @@ export class RequestService {
   list(): Observable<Request[]>{
     return this.http.get(`${this.baseurl}`) as Observable<Request[]>;
   }
+  pending(): Observable<Request[]>{
+    return this.http.get(`${this.baseurl}/pending`) as Observable<Request[]>;
+  }
   new(request: Request): Observable<any>{
     return this.http.put(`${this.baseurl}/${request.id}`, request) as Observable<any>;
   }
@@ -43,6 +48,9 @@ export class RequestService {
   }
   reject(request: Request): Observable<any>{
     return this.http.put(`${this.baseurl}/reject/${request.id}`, request) as Observable<any>;
+  }
+  nonUser(user: User): Observable<Request[]>{
+    return this.http.get(`${this.baseurl}/pending/${user.id}`) as Observable<Request[]>;
   }
 
 }

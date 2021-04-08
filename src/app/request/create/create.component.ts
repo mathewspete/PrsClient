@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Requestline } from 'src/app/requestline/requestline.class';
 import { RequestlineService } from 'src/app/requestline/requestline.service';
+import { SystemService } from 'src/app/system.service';
 import { User } from 'src/app/user/user.class';
 import { UserService } from 'src/app/user/user.service';
 import { Request } from '../request.class';
@@ -17,8 +18,10 @@ export class RequestCreateComponent implements OnInit {
   request: Request = new Request();
   requestlines: Requestline[];
   users: User[];
+  currentUser: number;
 
   constructor(
+    private syssrv: SystemService,
     private requestsvc: RequestService,
     private requestlinesvc: RequestlineService,
     private usersvc: UserService,
@@ -26,6 +29,7 @@ export class RequestCreateComponent implements OnInit {
   ) { }
 
   save(): void {
+    this.request.userId = this.syssrv.loggedInUser.id;
     console.log("Before Create:", this.request);
     this.requestlinesvc.list().subscribe(
       res => {

@@ -2,7 +2,9 @@
 <main>
     <div class="container">
         <h3>User List</h3>
-        <span><a routerLink="/user/create"> Create </a></span>
+        <span><button type="button" class="btn btn-primary btn-sm" routerLink="/user/create"> Add <span class="material-icons md-18">
+            add_circle
+            </span></button></span>
         <span class="search"><input [(ngModel)]="searchCriteria" type="text" placeholder="Search"></span>
         <table class="table table-sm table-striped table-hover">
             <thead>
@@ -25,9 +27,14 @@
                     <td>{{user.isReviewer | boolYN}}</td>
                     <td>{{user.isAdmin | boolYN}}</td>
                     <td>
-                        <a routerLink="/user/edit/{{user.id}}">Edit</a>
-                        <span> | </span>
-                        <a routerLink="/user/detail/{{user.id}}">Delete</a>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <button type="button" class="btn btn-primary btn-sm" routerLink="/user/edit/{{user.id}}">Edit<span class="material-icons md-18">
+                                edit_note
+                                </span></button>
+                            <button type="button" class="btn btn-danger btn-sm" routerLink="/user/detail/{{user.id}}">Delete<span class="material-icons md-18">
+                                delete
+                                </span></button>
+                        </div>
                     </td>
                 </tr>
             </tbody>

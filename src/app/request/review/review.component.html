@@ -1,7 +1,7 @@
 <app-menu></app-menu>
 <main>
     <div class="container">
-        <h3>Request List</h3>
+        <h3>Pending Review</h3>
         <span><button type="button" class="btn btn-primary btn-sm" routerLink="/request/create"> Add <span class="material-icons md-18">
             add_circle
             </span></button></span>
@@ -28,13 +28,13 @@
                     <td>{{request.user.username}}</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                            <button type="button" class="btn btn-primary btn-sm" routerLink="/request/edit/{{request.id}}"><span class="icontext">Edit</span><span class="material-icons md-18">
+                            <button type="button" class="btn btn-primary btn-sm" routerLink="/request/edit/{{request.id}}">Edit<span class="material-icons md-18">
                                 edit_note
                                 </span></button>
-                            <button type="button" class="btn btn-danger btn-sm" routerLink="/request/detail/{{request.id}}"><span class="icontext">Delete</span><span class="material-icons md-18">
+                            <button type="button" class="btn btn-danger btn-sm" routerLink="/request/detail/{{request.id}}">Delete<span class="material-icons md-18">
                                 delete
                                 </span></button>
-                            <button type="button" class="btn btn-info btn-sm" routerLink="/request/line/{{request.id}}"><span class="icontext">Lines</span><span class="material-icons md-18">
+                            <button type="button" class="btn btn-info btn-sm" routerLink="/request/line/{{request.id}}">Lines<span class="material-icons md-18">
                                 receipt_long
                                 </span></button>
                         </div>

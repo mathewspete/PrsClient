@@ -24,30 +24,13 @@
                         <th>Delivery Mode</th>
                         <td><input [(ngModel)]="request.deliveryMode" type="text" ></td>
                     </tr>
-                    <tr>
-                        <th>Rejection Reason</th>
-                        <td><input [(ngModel)]="request.rejectionReason" type="text" disabled>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Total</th>
-                        <td>$<input [(ngModel)]="request.total" type="number" disabled>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>User</th>
-                        <td>
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example Disabled" [(ngModel)]="request.userId" disabled>
-                                <option *ngFor="let user of users" [ngValue]="user.id">{{user.username}}</option>
-                                <!--<option *ngFor="let user of users" {{user.id}}>{{user.name}}</option>-->
-                            </select>
-                        </td>
-                    </tr>
                 </thead>
             </table>
             <div class="flex">
                 <span>
-                    <button (click)="save()" class="btn btn-warning float-right">Save</button>
+                    <button (click)="save()" class="btn btn-primary float-right">Save<span class="material-icons md-18">
+                        save
+                        </span></button>
                 </span>
             </div>
         </div>

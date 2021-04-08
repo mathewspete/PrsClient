@@ -42,13 +42,19 @@
             <div class="flex">
 
                 <span *ngIf="!showVerify">
-                    <button (click)="toggleVerify()" class="btn btn-danger">Delete</button>
+                    <button (click)="toggleVerify()" class="btn btn-danger">Delete<span class="material-icons md-18">
+                        delete
+                        </span></button>
                 </span>
                 <span *ngIf="!showVerify">
-                    <button (click)="edit()" class="btn btn-warning float-right">Edit</button>
+                    <button (click)="edit()" class="btn btn-primary float-right">Edit<span class="material-icons md-18">
+                        edit_note
+                        </span></button>
                 </span>
                 <span *ngIf="showVerify">
-                    <button (click)="delete()" class="btn btn-danger float-right">Confirm Delete</button>
+                    <button (click)="delete()" class="btn btn-danger float-right">Confirm Delete<span class="material-icons md-18">
+                        delete
+                        </span></button>
                 </span>
             </div>
         </div>

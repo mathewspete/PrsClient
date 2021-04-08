@@ -38,6 +38,8 @@ import { RequestlineListComponent } from './requestline/list/list.component';
 import { SearchRequestPipe } from './search-request.pipe';
 import { SearchRequestlinePipe } from './search-requestline.pipe';
 import { RequestLineComponent } from './request/line/line.component';
+import { RequestReviewComponent } from './request/review/review.component';
+import { CurrencyPipe } from './currency.pipe';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,9 @@ import { RequestLineComponent } from './request/line/line.component';
     RequestlineListComponent,
     SearchRequestPipe,
     SearchRequestlinePipe,
-    RequestLineComponent
+    RequestLineComponent,
+    RequestReviewComponent,
+    CurrencyPipe
   ],
   imports: [
     BrowserModule,

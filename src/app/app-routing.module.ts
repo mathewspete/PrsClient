@@ -12,6 +12,7 @@ import { RequestDetailComponent } from './request/detail/detail.component';
 import { RequestEditComponent } from './request/edit/edit.component';
 import { RequestLineComponent } from './request/line/line.component';
 import { RequestListComponent } from './request/list/list.component';
+import { RequestReviewComponent } from './request/review/review.component';
 import { RequestlineCreateComponent } from './requestline/create/create.component';
 import { RequestlineDetailComponent } from './requestline/detail/detail.component';
 import { RequestlineEditComponent } from './requestline/edit/edit.component';
@@ -50,8 +51,9 @@ const routes: Routes = [
   {path: 'request/edit/:id', component: RequestEditComponent},
   {path: 'request/line/:id', component: RequestLineComponent},
   {path: 'request/list', component: RequestListComponent},
+  {path: 'request/review', component: RequestReviewComponent},
   {path: 'requestline/detail/:id', component: RequestlineDetailComponent},
-  {path: 'requestline/create', component: RequestlineCreateComponent},
+  {path: 'requestline/create/:rid', component: RequestlineCreateComponent},
   {path: 'requestline/edit/:id', component: RequestlineEditComponent},
   {path: 'requestline/list', component: RequestlineListComponent},
   
@@ -61,7 +63,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

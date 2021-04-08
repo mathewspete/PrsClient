@@ -11,14 +11,7 @@
                         <th>Id</th>
                         <td><input [(ngModel)]="requestline.id" type="text" disabled></td>
                     </tr>
-                    <tr>
-                        <th>Request</th>
-                        <td>
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example" [(ngModel)]="requestline.requestId">
-                                <option *ngFor="let request of requests" [ngValue]="request.id">{{request.id}} - {{request.description}}</option>
-                            </select>
-                        </td>
-                    </tr>
+                  
                     <tr>
                         <th>Item</th>
                         <td>
@@ -42,7 +35,9 @@
             </table>
             <div class="flex">
                 <span>
-                    <button (click)="save()" class="btn btn-warning float-right">Save</button>
+                    <button (click)="save()" class="btn btn-primary float-right">Save<span class="material-icons md-18">
+                        save
+                        </span></button>
                 </span>
             </div>
         </div>

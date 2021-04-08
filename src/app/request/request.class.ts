@@ -8,8 +8,8 @@ export class Request {
     rejectionReason: String = null;
     deliveryMode: String;
     status: String = "NEW";
-    total:Number;
-    userId: Number;
+    total: number;
+    userId: number;
     user: User;
     userName: string;
     requestLine: Requestline;

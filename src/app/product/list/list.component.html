@@ -2,7 +2,9 @@
 <main>
     <div class="container">
         <h3>Product List</h3>
-        <span><a routerLink="/product/create"> Create </a></span>
+        <span><button type="button" class="btn btn-primary btn-sm" routerLink="/product/create"> Add <span class="material-icons md-18">
+            add_circle
+            </span></button></span>
         <span class="search"><input [(ngModel)]="searchCriteria" type="text" placeholder="Search"></span>
         <table class="table table-sm table-striped table-hover">
             <thead>
@@ -33,9 +35,14 @@
                         </div>
                     </td>
                     <td>
-                        <a routerLink="/product/edit/{{product.id}}">Edit</a>
-                        <span> | </span>
-                        <a routerLink="/product/detail/{{product.id}}">Delete</a>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <button type="button" class="btn btn-primary btn-sm" routerLink="/product/edit/{{product.id}}">Edit<span class="material-icons md-18">
+                                edit_note
+                                </span></button>
+                            <button type="button" class="btn btn-danger btn-sm"  routerLink="/product/detail/{{product.id}}">Delete<span class="material-icons md-18">
+                                delete
+                                </span></button>
+                        </div>
                     </td>
                 </tr>
             </tbody>

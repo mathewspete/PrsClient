@@ -40,6 +40,8 @@ import { SearchRequestlinePipe } from './search-requestline.pipe';
 import { RequestLineComponent } from './request/line/line.component';
 import { RequestReviewComponent } from './request/review/review.component';
 import { CurrencyPipe } from './currency.pipe';
+import { AuthModule } from '@auth0/auth0-angular';
+import { AuthButtonComponent } from './user/auth';
 
 @NgModule({
   declarations: [
@@ -78,13 +80,18 @@ import { CurrencyPipe } from './currency.pipe';
     SearchRequestlinePipe,
     RequestLineComponent,
     RequestReviewComponent,
-    CurrencyPipe
+    CurrencyPipe,
+    AuthButtonComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AuthModule.forRoot({
+      domain: 'dev-q3b7syzp.us.auth0.com',
+      clientId: 'pffYyHogt5Ea2d7kT38Q457fTmSfJacv'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

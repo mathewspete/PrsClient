@@ -30,6 +30,7 @@ make edits in app> user > user.service.ts
 
 
 
+https://auth0.com/docs/quickstart/spa/angular
+npm install @auth0/auth0-angular
+import { AuthModule } from '@auth0/auth0-angular';
 
-
-pipe

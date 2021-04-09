@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SystemService } from 'src/app/system.service';
 import { User } from '../user.class';
 import { UserService } from '../user.service';
 
@@ -8,12 +9,13 @@ import { UserService } from '../user.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  
+
   users: User[] = [];
 
   searchCriteria: string = "";
 
   constructor(
+    private syssvc: SystemService,
     private service: UserService,
 
   ) { }

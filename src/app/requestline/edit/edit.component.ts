@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/product/product.class';
 import { ProductService } from 'src/app/product/product.service';
+import { SystemService } from 'src/app/system.service';
 import { Requestline } from '../requestline.class';
 import { RequestlineService } from '../requestline.service';
 
@@ -17,6 +18,7 @@ export class RequestlineEditComponent implements OnInit {
   products: Product[];
 
   constructor(
+    private syssvc: SystemService,
     private requestlinesvc: RequestlineService,
     private productsvc: ProductService,
     private route: ActivatedRoute,
@@ -27,7 +29,7 @@ export class RequestlineEditComponent implements OnInit {
     console.log("Before Change", this.requestline);
     this.requestlinesvc.edit(this.requestline).subscribe(
       res => {
-        console.warn(`Successfully edited ${this.requestline.id}`); 
+        console.warn(`Successfully edited ${this.requestline.id}`);
         this.router.navigateByUrl(`/request/line/${this.requestline.requestId}`);
       },
       err => {

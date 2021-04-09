@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SystemService } from 'src/app/system.service';
 import { Vendor } from '../vendor.class';
 import { VendorService } from '../vendor.service';
 
@@ -13,6 +14,7 @@ export class VendorCreateComponent implements OnInit {
   vendor: Vendor = new Vendor();
 
   constructor(
+    private syssvc: SystemService,
     private vendorsvc: VendorService,
     private router: Router
   ) { }

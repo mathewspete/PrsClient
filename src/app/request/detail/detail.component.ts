@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SystemService } from 'src/app/system.service';
 import { User } from 'src/app/user/user.class';
 import { Request } from '../request.class';
 import { RequestService } from '../request.service';
@@ -15,8 +16,9 @@ export class RequestDetailComponent implements OnInit {
   id: number = 0;
   showVerify: boolean = false;
   users: User[];
-  
+
   constructor(
+    private syssvc: SystemService,
     private service: RequestService,
     private route: ActivatedRoute,
     private router: Router
@@ -26,7 +28,7 @@ export class RequestDetailComponent implements OnInit {
     this.showVerify = !this.showVerify;
   }
 
-  edit(): void{
+  edit(): void {
     this.router.navigateByUrl(`/request/edit/${this.id}`)
   }
 

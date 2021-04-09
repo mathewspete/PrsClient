@@ -8,7 +8,8 @@ import { Requestline } from './requestline.class';
 })
 export class RequestlineService {
 
-  baseurl: string = "http://localhost:39623/api/Requestlines"
+  // baseurl: string = "http://localhost:39623/api/Requestlines"
+  baseurl: string = "http://192.168.200.170:45456/api/Requestlines"
 
 
 

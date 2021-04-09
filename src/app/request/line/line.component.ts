@@ -19,10 +19,10 @@ export class RequestLineComponent implements OnInit {
   id: number = 0;
   showVerify: boolean = false;
   users: User[];
-  admin: boolean = false;
-  reviewer: boolean;
-  creator: boolean = false;
-  
+  isAdmin: boolean = false;
+  isReviewer: boolean = false;
+  isOwner: boolean = false;
+
   constructor(
     private syssvc: SystemService,
     private service: RequestService,
@@ -61,7 +61,7 @@ export class RequestLineComponent implements OnInit {
         console.error(err);
       }
     )
-    
+
   }
 
   approve(): void {
@@ -106,8 +106,9 @@ export class RequestLineComponent implements OnInit {
       res => {
         console.log("Request:", res);
         this.request = res;
-        this.creator = (this.syssvc.loggedInUser.id === this.request.userId);
-        this.admin = this.syssvc.isAdmin();
+        this.isOwner = (this.syssvc.loggedInUser.id === this.request.userId);
+        this.isAdmin = this.syssvc.isAdmin();
+        this.isReviewer = this.syssvc.isReviewer();
       },
       err => {
         console.error(err);

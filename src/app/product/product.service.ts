@@ -8,7 +8,8 @@ import { Product } from './product.class';
 })
 export class ProductService {
 
-  baseurl: string = "http://localhost:39623/api/Products"
+  baseurl: string = "http://192.168.200.170:45456/api/Products"
+  //baseurl: string = "http://localhost:39623/api/Products"
 
 
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SystemService } from 'src/app/system.service';
 import { Vendor } from '../vendor.class';
 import { VendorService } from '../vendor.service';
 
@@ -13,8 +14,9 @@ export class VendorDetailComponent implements OnInit {
   vendor: Vendor = null;
   id: number = 0;
   showVerify: boolean = false;
-  
+
   constructor(
+    private syssvc: SystemService,
     private service: VendorService,
     private route: ActivatedRoute,
     private router: Router
@@ -24,7 +26,7 @@ export class VendorDetailComponent implements OnInit {
     this.showVerify = !this.showVerify;
   }
 
-  edit(): void{
+  edit(): void {
     this.router.navigateByUrl(`/vendor/edit/${this.id}`)
   }
 

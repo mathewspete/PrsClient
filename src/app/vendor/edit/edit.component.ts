@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SystemService } from 'src/app/system.service';
 import { Vendor } from '../vendor.class';
 import { VendorService } from '../vendor.service';
 
@@ -14,6 +15,7 @@ export class VendorEditComponent implements OnInit {
   id: number = 0;
 
   constructor(
+    private syssvc: SystemService,
     private vendorsvc: VendorService,
     private route: ActivatedRoute,
     private router: Router
@@ -23,13 +25,13 @@ export class VendorEditComponent implements OnInit {
     console.log("Before Change", this.vendor);
     this.vendorsvc.edit(this.vendor).subscribe(
       res => {
-        console.warn(`Successfully edited ${this.vendor.code}`); 
+        console.warn(`Successfully edited ${this.vendor.code}`);
         this.router.navigateByUrl('/vendor/list');
       },
       err => {
         console.error(err);
       }
-    )  
+    )
   }
   ngOnInit(): void {
     this.id = this.route.snapshot.params.id;

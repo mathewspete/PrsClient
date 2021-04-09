@@ -1,85 +1,93 @@
 <app-menu></app-menu>
 <main>
-    <div class="container">
-        <h3>Request</h3>
-        <table class="table table-sm table-striped table-hover" *ngIf="request">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Description</th>
-                    <th *ngIf="showVerify">Rejection Reason</th>
-                    <th>Status</th>
-                    <th>Total</th>
-                    <th>User</th>
-                    <th *ngIf="creator || admin">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{request.id}}</td>
-                    <td>{{request.description}}</td>
-                    <td *ngIf="showVerify">
-                        <input [(ngModel)]="request.rejectionReason" type="text" class="form-control form-control-dark w-100" id="reason" >
-                    </td>
-                    <td>{{request.status}}</td>
-                    <td>${{request.total}}</td>
-                    <td>{{request.user.username}}</td>
-                    <td>
-                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                            <button type="button" class="btn btn-success btn-sm" (click)="approve()" *ngIf="admin">Approve<span class="material-icons md-18">
-                                fact_check
-                                </span></button>
-                            <button type="button" class="btn btn-warning btn-sm" (click)="review()"  *ngIf="creator">Review<span class="material-icons md-18">
-                                add_task
-                                </span></button>
-                            <button type="button" class="btn btn-danger btn-sm" (click)="toggleVerify()" *ngIf="!showVerify && admin">Reject<span class="material-icons md-18">
-                                thumb_down_alt
-                                </span></button>
-                            <button type="button" class="btn btn-danger btn-sm" (click)="reject()" *ngIf="showVerify">Confirm Reject<span class="material-icons md-18">
-                                thumb_down
-                                </span></button>
-                      </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <h3><span class="material-icons">
-            receipt_long
-            </span>Items</h3>
-        <span  *ngIf="request"><button type="button" class="btn btn-primary btn-sm" routerLink="/requestline/create/{{request.id}}"> Add <span class="material-icons md-18">
-            add_circle
-            </span></button></span>
-        <table class="table table-sm table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Item</th>
-                    <th>Qty</th>
-                    <th>Price</th>
-                    <th>Total</th>
-                    <th *ngIf="creator">Action</th>
-                </tr>
-            </thead>
-            <tbody  *ngIf="request">
-                <!--<tr *ngFor="let requestline of request.requestLine | searchRequestline: searchCriteria">-->
-                <tr *ngFor="let reqline of request.requestLine">
-                    <td>{{reqline.id}}</td>
-                    <td>{{reqline.product.name}}</td>
-                    <td>{{reqline.quantity}}</td>
-                    <td>${{reqline.product.price}}</td>
-                    <td>${{reqline.product.price * reqline.quantity}}</td>
-                    <td *ngIf="creator">
-                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                            <button class="btn btn-primary btn-sm" routerLink="/requestline/edit/{{reqline.id}}">Edit<span class="material-icons md-18">
-                                edit_note
-                                </span></button>
-                            <button (click)="deleteline(reqline)" class="btn btn-danger btn-sm">Delete<span class="material-icons md-18">
-                                delete_forever
-                                </span></button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+  <div class="container">
+    <h3>Request</h3>
+    <table class="table table-sm table-striped table-hover" *ngIf="request">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Description</th>
+          <th *ngIf="showVerify">Rejection Reason</th>
+          <th>Status</th>
+          <th>Total</th>
+          <th>User</th>
+          <th *ngIf="isOwner || admin">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{request.id}}</td>
+          <td>{{request.description}}</td>
+          <td *ngIf="showVerify">
+            <input [(ngModel)]="request.rejectionReason" type="text" class="form-control form-control-dark w-100"
+              id="reason">
+          </td>
+          <td>{{request.status}}</td>
+          <td>${{request.total}}</td>
+          <td>{{request.user.username}}</td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+              <button type="button" class="btn btn-success btn-sm" (click)="approve()"
+                *ngIf="isAdmin && !isOwner">Approve<span class="material-icons md-18">
+                  fact_check
+                </span></button>
+              <button type="button" class="btn btn-warning btn-sm" (click)="review()"
+                *ngIf="isOwner || isAdmin">Review<span class="material-icons md-18">
+                  add_task
+                </span></button>
+              <button type="button" class="btn btn-danger btn-sm" (click)="toggleVerify()"
+                *ngIf="!showVerify && (isReviewer || isAdmin)">Reject<span class="material-icons md-18">
+                  thumb_down_alt
+                </span></button>
+              <button type="button" class="btn btn-danger btn-sm" (click)="reject()" *ngIf="showVerify">Confirm
+                Reject<span class="material-icons md-18">
+                  thumb_down
+                </span></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h3><span class="material-icons">
+        receipt_long
+      </span>Items</h3>
+    <span *ngIf="request"><button type="button" class="btn btn-primary btn-sm"
+        routerLink="/requestline/create/{{request.id}}"> Add <span class="material-icons md-18">
+          add_circle
+        </span></button></span>
+    <table class="table table-sm table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>Price</th>
+          <th>Total</th>
+          <th *ngIf="isOwner || isAdmin">Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="request">
+        <!--<tr *ngFor="let requestline of request.requestLine | searchRequestline: searchCriteria">-->
+        <tr *ngFor="let reqline of request.requestLine">
+          <td>{{reqline.id}}</td>
+          <td>{{reqline.product.name}}</td>
+          <td>{{reqline.quantity}}</td>
+          <td>${{reqline.product.price}}</td>
+          <td>${{reqline.product.price * reqline.quantity}}</td>
+          <td *ngIf="isOwner || isAdmin">
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+              <button class="btn btn-primary btn-sm" routerLink="/requestline/edit/{{reqline.id}}">Edit<span
+                  class="material-icons md-18">
+                  edit_note
+                </span></button>
+              <button (click)="deleteline(reqline)" class="btn btn-danger btn-sm">Delete<span
+                  class="material-icons md-18">
+                  delete_forever
+                </span></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </main>

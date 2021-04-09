@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SystemService } from 'src/app/system.service';
 import { User } from '../user.class';
 import { UserService } from '../user.service';
 
@@ -14,6 +15,7 @@ export class UserEditComponent implements OnInit {
   id: number = 0;
 
   constructor(
+    private syssvc: SystemService,
     private usersvc: UserService,
     private route: ActivatedRoute,
     private router: Router
@@ -23,13 +25,13 @@ export class UserEditComponent implements OnInit {
     console.log("Before Change", this.user);
     this.usersvc.edit(this.user).subscribe(
       res => {
-        console.warn(`Successfully edited ${this.user.username}`); 
+        console.warn(`Successfully edited ${this.user.username}`);
         this.router.navigateByUrl('/user/list');
       },
       err => {
         console.error(err);
       }
-    )  
+    )
   }
   ngOnInit(): void {
     this.id = this.route.snapshot.params.id;

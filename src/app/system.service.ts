@@ -6,7 +6,7 @@ import { User } from "./user/user.class";
   providedIn: 'root'
 })
 
-export class SystemService  {
+export class SystemService {
   public loggedInUser: User | null = null;
 
   get(): User {
@@ -14,9 +14,13 @@ export class SystemService  {
   }
 
   verifyLogin() {
-    if(this.loggedInUser == null){
+    if (this.loggedInUser == null) {
       return this.router.navigateByUrl("/login");
     }
+  }
+
+  isLoggedIn(): boolean {
+    return (this.loggedInUser === null) ? false : true;
   }
 
   isAdmin(): boolean {
@@ -27,9 +31,9 @@ export class SystemService  {
       return this.loggedInUser.isAdmin
     }
   }
-  
+
   isReviewer(): boolean {
-    if(this.loggedInUser == null) {
+    if (this.loggedInUser == null) {
       return false;
     }
     else {
@@ -37,16 +41,15 @@ export class SystemService  {
     }
   }
 
-  isLoggedIn(): boolean {
-    return (this.loggedInUser === null)?false:true;
-  }
-
   logout(): void {
     this.loggedInUser = null;
   }
 
+
+
+
   constructor(
     private router: Router
   ) { }
-  
+
 }

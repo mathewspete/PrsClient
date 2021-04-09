@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SystemService } from 'src/app/system.service';
 import { Request } from '../request.class';
 import { RequestService } from '../request.service';
 
@@ -8,20 +9,21 @@ import { RequestService } from '../request.service';
   styleUrls: ['./list.component.css']
 })
 export class RequestListComponent implements OnInit {
-  
+
   requests: Request[] = [];
 
   searchCriteria: string = "";
 
   constructor(
+    private syssvc: SystemService,
     private service: RequestService,
   ) { }
 
-//  injectVendorName(requests: Request[]){
-//    for(let p of requests) {
-//      p.vendorName = p.vendor.name;
-//    }
-//  }
+  //  injectVendorName(requests: Request[]){
+  //    for(let p of requests) {
+  //      p.vendorName = p.vendor.name;
+  //    }
+  //  }
 
 
 

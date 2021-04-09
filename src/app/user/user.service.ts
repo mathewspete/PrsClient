@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core'; 
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from './user.class';
 
@@ -8,7 +8,8 @@ import { User } from './user.class';
 })
 export class UserService {
 
-  baseurl: string = "http://localhost:39623/api/Users"
+  //baseurl: string = "http://localhost:39623/api/Users"
+  baseurl: string = "http://192.168.200.170:45456/api/Users"
 
   constructor(
     private http: HttpClient

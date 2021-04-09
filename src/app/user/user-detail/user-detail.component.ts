@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SystemService } from 'src/app/system.service';
 import { User } from '../user.class';
 import { UserService } from '../user.service';
 
@@ -13,8 +14,9 @@ export class UserDetailComponent implements OnInit {
   user: User = null;
   id: number = 0;
   showVerify: boolean = false;
-  
+
   constructor(
+    private syssvc: SystemService,
     private service: UserService,
     private route: ActivatedRoute,
     private router: Router
@@ -24,7 +26,7 @@ export class UserDetailComponent implements OnInit {
     this.showVerify = !this.showVerify;
   }
 
-  edit(): void{
+  edit(): void {
     this.router.navigateByUrl(`/user/edit/${this.id}`)
   }
 

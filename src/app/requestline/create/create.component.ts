@@ -1,3 +1,4 @@
+import { SystemService } from './../../system.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/product/product.class';
@@ -19,6 +20,7 @@ export class RequestlineCreateComponent implements OnInit {
   requestId: number;
 
   constructor(
+    private syssvc: SystemService,
     private requestlinesvc: RequestlineService,
     private productsvc: ProductService,
     private route: ActivatedRoute,

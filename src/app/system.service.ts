@@ -7,7 +7,12 @@ import { User } from "./user/user.class";
 })
 
 export class SystemService {
+
+  public domain: string = "http://localhost:39623"
+
   public loggedInUser: User | null = null;
+
+  public returnUrl: string = `/home`;
 
   get(): User {
     return this.loggedInUser;
@@ -15,6 +20,8 @@ export class SystemService {
 
   verifyLogin() {
     if (this.loggedInUser == null) {
+      this.returnUrl = this.router.url;
+      console.log("returnUrl:", this.returnUrl);
       return this.router.navigateByUrl("/login");
     }
   }
@@ -44,6 +51,7 @@ export class SystemService {
   logout(): void {
     this.loggedInUser = null;
   }
+
 
 
 

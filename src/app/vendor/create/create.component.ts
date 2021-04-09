@@ -20,6 +20,7 @@ export class VendorCreateComponent implements OnInit {
   ) { }
 
   save(): void {
+    this.syssvc.verifyLogin();
     console.log("Before Create:", this.vendor);
     this.vendorsvc.create(this.vendor).subscribe(
       res => {

@@ -16,9 +16,21 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private syssvc: SystemService,
-    private service: UserService,
+    private service: UserService
 
   ) { }
+
+  isAdmin() {
+    return this.syssvc.isAdmin();
+  }
+
+  isOwner(U: User) {
+    if (this.syssvc.loggedInUser == null){
+      return false;
+    } else {
+      return (U.id == this.syssvc.loggedInUser.id);
+    }
+  }
 
   ngOnInit(): void {
     this.service.list()

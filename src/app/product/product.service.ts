@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { SystemService } from '../system.service';
 import { Product } from './product.class';
 
 @Injectable({
@@ -8,13 +9,10 @@ import { Product } from './product.class';
 })
 export class ProductService {
 
-  baseurl: string = "http://192.168.200.170:45456/api/Products"
-  //baseurl: string = "http://localhost:39623/api/Products"
-
-
-
+  baseurl: string = `${this.syssvc.domain}/api/Products`
 
   constructor(
+    private syssvc: SystemService,
     private http: HttpClient
   ) { }
 

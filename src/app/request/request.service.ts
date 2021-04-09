@@ -10,14 +10,12 @@ import { Request } from './request.class';
 })
 export class RequestService {
 
-  //baseurl: string = "http://localhost:39623/api/Requests"
-  baseurl: string = "http://192.168.200.170:45456/api/Requests"
-
+  baseurl: string = `${this.syssvc.domain}/api/Requests`
 
 
   constructor(
-    private http: HttpClient,
-    private syssvc: SystemService
+    private syssvc: SystemService,
+    private http: HttpClient
   ) { }
 
   create(request: Request): Observable<Request>{
@@ -53,5 +51,8 @@ export class RequestService {
   nonUser(user: User): Observable<Request[]>{
     return this.http.get(`${this.baseurl}/pending/${user.id}`) as Observable<Request[]>;
   }
+
+
+
 
 }

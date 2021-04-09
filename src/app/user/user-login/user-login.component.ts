@@ -21,6 +21,8 @@ export class UserLoginComponent implements OnInit {
     private router: Router
   ) { }
 
+  
+
   login(): void{
     console.log("Before login:", this.user);
     this.usersvc.login(this.user.username, this.user.password).subscribe(
@@ -29,7 +31,7 @@ export class UserLoginComponent implements OnInit {
         this.sys.loggedInUser = res;
         
         //console.log("loggedInUser:", sys.loggedInUser);
-      this.router.navigateByUrl("/request/list");
+      this.router.navigateByUrl(this.sys.returnUrl);
       },
       err => {
         console.error(err);  

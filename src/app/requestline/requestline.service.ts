@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { SystemService } from '../system.service';
 import { Requestline } from './requestline.class';
 
 @Injectable({
@@ -8,13 +9,11 @@ import { Requestline } from './requestline.class';
 })
 export class RequestlineService {
 
-  // baseurl: string = "http://localhost:39623/api/Requestlines"
-  baseurl: string = "http://192.168.200.170:45456/api/Requestlines"
-
-
+  baseurl: string = `${this.syssvc.domain}/api/Requestlines`
 
 
   constructor(
+    private syssvc: SystemService,
     private http: HttpClient
   ) { }
 

@@ -23,20 +23,28 @@ export class MenuComponent implements OnInit {
 
   currentUser: User = this.syssvc.loggedInUser;
   showLogout: boolean = false;
+  loggedInAs: string;
 
   constructor(
     private syssvc: SystemService,
     private router: Router
   ) { }
 
+  loginPage() {
+    this.syssvc.returnUrl = this.router.url;
+    this.router.navigateByUrl("/login");
+  }
+
   logout() {
     this.syssvc.logout();
     return this.router.navigateByUrl("/home");
+    this.loggedInAs = null;
   }
 
   ngOnInit(): void {
     if (this.syssvc.loggedInUser != null) {
       this.showLogout = this.syssvc.isLoggedIn();
+      this.loggedInAs = this.syssvc.loggedInUser.firstname;
     }
     
   }

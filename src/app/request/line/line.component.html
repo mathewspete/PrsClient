@@ -11,7 +11,7 @@
           <th>Status</th>
           <th>Total</th>
           <th>User</th>
-          <th *ngIf="isOwner || admin">Action</th>
+          <th *ngIf="isOwner || isAdmin || isReviewer">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -28,7 +28,7 @@
           <td>
             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
               <button type="button" class="btn btn-success btn-sm" (click)="approve()"
-                *ngIf="isAdmin && !isOwner">Approve<span class="material-icons md-18">
+                *ngIf="isReviewer && !isOwner">Approve<span class="material-icons md-18">
                   fact_check
                 </span></button>
               <button type="button" class="btn btn-warning btn-sm" (click)="review()"
@@ -36,7 +36,7 @@
                   add_task
                 </span></button>
               <button type="button" class="btn btn-danger btn-sm" (click)="toggleVerify()"
-                *ngIf="!showVerify && (isReviewer || isAdmin)">Reject<span class="material-icons md-18">
+                *ngIf="!showVerify && (isReviewer)">Reject<span class="material-icons md-18">
                   thumb_down_alt
                 </span></button>
               <button type="button" class="btn btn-danger btn-sm" (click)="reject()" *ngIf="showVerify">Confirm
@@ -52,7 +52,7 @@
         receipt_long
       </span>Items</h3>
     <span *ngIf="request"><button type="button" class="btn btn-primary btn-sm"
-        routerLink="/requestline/create/{{request.id}}"> Add <span class="material-icons md-18">
+        routerLink="/requestline/create/{{request.id}}" *ngIf="isOwner || isAdmin"> Add <span class="material-icons md-18">
           add_circle
         </span></button></span>
     <table class="table table-sm table-striped table-hover">

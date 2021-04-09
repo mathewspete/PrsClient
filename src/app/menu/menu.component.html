@@ -12,15 +12,16 @@
           
         </li>
       </ul>
+      <p class="greeting" *ngIf="loggedInAs">Hello, {{loggedInAs}}! </p>
       <form class="d-flex">
         <!--<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
-        <button class="btn btn-outline-success my-2 my-sm-0" routerLink="/login" *ngIf="!showLogout">Login<span class="material-icons md-18">
+        <button class="btn btn-outline-success my-2 my-sm-0" (click)="loginPage()" *ngIf="!showLogout">Login<span class="material-icons md-18">
           login
           </span></button>
-        <button class="btn btn-outline-danger my-2 my-sm-0" routerLink="/login" *ngIf="showLogout">Logout<span class="material-icons  md-18">
+        <button class="btn btn-outline-danger my-2 my-sm-0" (click)="logout()" *ngIf="showLogout">Logout<span class="material-icons  md-18">
           logout
           </span></button>
-          <app-auth-button></app-auth-button>
+          <!--<app-auth-button></app-auth-button>-->
       </form>
     </div>
   </div>

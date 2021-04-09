@@ -54,3 +54,27 @@ a {
 .material-icons.md-48 { font-size: 48px; }
 
 
+ol.zero {
+    list-style: decimal-leading-zero;
+}
+
+ol.upper {
+    list-style-type: upper-alpha;
+}
+
+ol.lower {
+    list-style-type: lower-alpha;
+}
+
+ol.upper-roman {
+    list-style-type: upper-roman;
+}
+
+ol.lower-roman {
+    list-style-type: lower-roman;
+}
+
+.greeting {
+    color: rgba(255,255,255,.50);
+    margin: 0 1rem;
+}

@@ -2,7 +2,7 @@
 <main>
     <div class="container">
         <h3>User List</h3>
-        <span><button type="button" class="btn btn-primary btn-sm" routerLink="/user/create"> Add <span class="material-icons md-18">
+        <span><button type="button" class="btn btn-primary btn-sm" routerLink="/user/create" [disabled]="!isAdmin()"> Add <span class="material-icons md-18">
             add_circle
             </span></button></span>
         <span class="search"><input [(ngModel)]="searchCriteria" type="text" placeholder="Search"></span>
@@ -28,10 +28,10 @@
                     <td>{{user.isAdmin | boolYN}}</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                            <button type="button" class="btn btn-primary btn-sm" routerLink="/user/edit/{{user.id}}">Edit<span class="material-icons md-18">
+                            <button type="button" class="btn btn-primary btn-sm" routerLink="/user/edit/{{user.id}}" [disabled]="!isAdmin() && !isOwner(user)">Edit<span class="material-icons md-18">
                                 edit_note
                                 </span></button>
-                            <button type="button" class="btn btn-danger btn-sm" routerLink="/user/detail/{{user.id}}">Delete<span class="material-icons md-18">
+                            <button type="button" class="btn btn-danger btn-sm" routerLink="/user/detail/{{user.id}}" [disabled]="!isAdmin()">Delete<span class="material-icons md-18">
                                 delete
                                 </span></button>
                         </div>

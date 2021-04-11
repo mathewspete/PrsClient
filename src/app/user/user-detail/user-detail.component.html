@@ -1,70 +1,73 @@
 <app-menu></app-menu>
 <main>
-    <div class="container">
-        <div>
-            <h3>User Detail</h3>
-        </div>
-        <div>
-            <table class="table table-sm  table-stripe table-hover" *ngIf="user">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <td><input [(ngModel)]="user.id" type="text" disabled></td>
-                    </tr>
-                    <tr>
-                        <th>Username</th>
-                        <td><input [(ngModel)]="user.username" type="text" disabled></td>
-                    </tr>
-                    <tr>
-                        <th>Password</th>
-                        <td><input [(ngModel)]="user.password" type="password" disabled>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>First Name</th>
-                        <td><input [(ngModel)]="user.firstname" type="text" disabled>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Last Name</th>
-                        <td><input [(ngModel)]="user.lastname" type="text" disabled></td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td><input [(ngModel)]="user.email" type="text" disabled></td>
-                    </tr>
-                    <tr>
-                        <th>Phone</th>
-                        <td><input [(ngModel)]="user.phone" type="text" disabled></td>
-                    </tr>
-                    <tr>
-                        <th>Reviewer</th>
-                        <td><input [(ngModel)]="user.isReviewer" type="checkbox" disabled></td>
-                    </tr>
-                    <tr>
-                        <th>Admin</th>
-                        <td><input [(ngModel)]="user.isAdmin" type="checkbox" disabled></td>
-                    </tr>
-                </thead>
-            </table>
-            <div class="flex">
-
-                <span *ngIf="!showVerify">
-                    <button (click)="toggleVerify()" class="btn btn-danger">Delete<span class="material-icons md-18">
-                        delete
-                        </span></button>
-                </span>
-                <span *ngIf="!showVerify">
-                    <button (click)="edit()" class="btn btn-primary float-right">Edit<span class="material-icons md-18">
-                        edit_note
-                        </span></button>
-                </span>
-                <span *ngIf="showVerify">
-                    <button (click)="delete()" class="btn btn-danger float-right">Confirm Delete<span class="material-icons md-18">
-                        delete_forever
-                        </span></button>
-                </span>
-            </div>
-        </div>
+  <div class="container">
+    <div>
+      <h3>User Detail</h3>
     </div>
+    <div>
+      <table class="table table-sm  table-stripe table-hover" *ngIf="user">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <td><input [(ngModel)]="user.id" type="text" disabled></td>
+          </tr>
+          <tr>
+            <th>Username</th>
+            <td><input [(ngModel)]="user.username" type="text" disabled></td>
+          </tr>
+          <tr>
+            <th>Password</th>
+            <td><input [(ngModel)]="user.password" type="password" disabled>
+            </td>
+          </tr>
+          <tr>
+            <th>First Name</th>
+            <td><input [(ngModel)]="user.firstname" type="text" disabled>
+            </td>
+          </tr>
+          <tr>
+            <th>Last Name</th>
+            <td><input [(ngModel)]="user.lastname" type="text" disabled></td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td><input [(ngModel)]="user.email" type="text" disabled></td>
+          </tr>
+          <tr>
+            <th>Phone</th>
+            <td><input [(ngModel)]="user.phone" type="text" disabled></td>
+          </tr>
+          <tr>
+            <th>Reviewer</th>
+            <td><input [(ngModel)]="user.isReviewer" type="checkbox" disabled></td>
+          </tr>
+          <tr>
+            <th>Admin</th>
+            <td><input [(ngModel)]="user.isAdmin" type="checkbox" disabled></td>
+          </tr>
+        </thead>
+      </table>
+      <div class="flex">
+
+        <span *ngIf="!showVerify">
+          <button *ngIf="isAdmin()" (click)="toggleVerify()" class="btn btn-danger">Delete<span
+              class="material-icons md-18">
+              delete
+            </span></button>
+        </span>
+        <span *ngIf="!showVerify">
+          <button *ngIf="isAdmin()" (click)="edit()" class="btn btn-primary float-right">Edit<span
+              class="material-icons md-18">
+              edit_note
+            </span></button>
+        </span>
+        <span *ngIf="showVerify">
+          <button (click)="delete()" class="btn btn-danger float-right">Confirm Delete<span
+              class="material-icons md-18">
+              delete_forever
+            </span></button>
+        </span>
+      </div>
+    </div>
+  </div>
 </main>

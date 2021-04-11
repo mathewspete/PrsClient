@@ -3,7 +3,9 @@
     <div class="container">
         <h3>Requestline List</h3>
         <span><a routerLink="/requestline/create"> Create </a></span>
-        <span class="search"><input [(ngModel)]="searchCriteria" type="text" placeholder="Search"></span>
+        <div class="filter-box">
+            <div class="search"><input [(ngModel)]="searchCriteria" type="text" placeholder="Filter"></div>
+        </div>
         <table class="table table-sm table-striped table-hover">
             <thead>
                 <tr>
@@ -16,7 +18,7 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="!waiting">
                 <tr *ngFor="let requestline of requestlines | searchRequestline: searchCriteria">
                     <td>{{requestline.id}}</td>
                     <td>{{requestline.requestId}}</td>
@@ -34,5 +36,11 @@
                 </tr>
             </tbody>
         </table>
+        <div class="spinner">
+            <span *ngIf="waiting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span *ngIf="waiting">
+                Loading...
+            </span>
+        </div>
     </div>
 </main>

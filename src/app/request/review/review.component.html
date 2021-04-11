@@ -1,46 +1,64 @@
 <app-menu></app-menu>
 <main>
-    <div class="container">
-        <h3>Pending Review</h3>
-        <span><button type="button" class="btn btn-primary btn-sm" routerLink="/request/create"> Add <span class="material-icons md-18">
-            add_circle
-            </span></button></span>
-        <span class="search"><input [(ngModel)]="searchCriteria" type="text" placeholder="Search"></span>
-        <table class="table table-sm table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Description</th>
-                    <th>Rejection Reason</th>
-                    <th>Status</th>
-                    <th>Total</th>
-                    <th>User</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let request of requests | searchRequest: searchCriteria">
-                    <td>{{request.id}}</td>
-                    <td>{{request.description}}</td>
-                    <td>{{request.rejectionReason}}</td>
-                    <td>{{request.status}}</td>
-                    <td>${{request.total}}</td>
-                    <td>{{request.user.username}}</td>
-                    <td>
-                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                            <button type="button" class="btn btn-primary btn-sm" routerLink="/request/edit/{{request.id}}">Edit<span class="material-icons md-18">
-                                edit_note
-                                </span></button>
-                            <button type="button" class="btn btn-danger btn-sm" routerLink="/request/detail/{{request.id}}">Delete<span class="material-icons md-18">
-                                delete
-                                </span></button>
-                            <button type="button" class="btn btn-info btn-sm" routerLink="/request/line/{{request.id}}">Lines<span class="material-icons md-18">
-                                receipt_long
-                                </span></button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+  <div class="container">
+    <div class="list-info">
+      <h3>Pending Review</h3>
     </div>
+    <div class="filter-box">
+      <div class="search"><input [(ngModel)]="searchCriteria" type="text" placeholder="Filter"></div>
+    </div>
+    <table class="table table-sm table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Description</th>
+          <th>Rejection Reason</th>
+          <th>Status</th>
+          <th>Total</th>
+          <th>User</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="!waiting">
+        <tr *ngFor="let request of requests | searchRequest: searchCriteria">
+          <td>{{request.id}}</td>
+          <td>{{request.description}}</td>
+          <td>{{request.rejectionReason}}</td>
+          <td>{{request.status}}</td>
+          <td>{{request.total | currency}}</td>
+          <td>{{request.user.username}}</td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+              <button *ngIf="isOwner(request) || isAdmin()" type="button" class="btn btn-primary btn-sm"
+                routerLink="/request/edit/{{request.id}}">
+                Edit
+                <span class="material-icons md-18">
+                  edit_note
+                </span>
+              </button>
+              <button *ngIf="isOwner(request) || isAdmin()" type="button" class="btn btn-danger btn-sm"
+                routerLink="/request/detail/{{request.id}}">
+                Delete
+                <span class="material-icons md-18">
+                  delete
+                </span>
+              </button>
+              <button type="button" class="btn btn-info btn-sm" routerLink="/request/line/{{request.id}}">
+                Lines
+                <span class="material-icons md-18">
+                  receipt_long
+                </span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="spinner">
+      <span *ngIf="waiting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      <span *ngIf="waiting">
+        Loading...
+      </span>
+    </div>
+  </div>
 </main>

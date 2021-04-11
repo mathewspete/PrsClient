@@ -12,6 +12,8 @@ import { UserService } from '../user.service';
 export class UserCreateComponent implements OnInit {
 
   user: User = new User();
+  waiting: boolean = false;
+
 
   constructor(
     private syssvc: SystemService,
@@ -19,20 +21,28 @@ export class UserCreateComponent implements OnInit {
     private router: Router
   ) { }
 
+  isAdmin(): boolean {
+    return this.syssvc.isAdmin();
+  }
+
   save(): void {
+    this.waiting = !this.waiting;
     console.log("Before Create:", this.user);
     this.usersvc.create(this.user).subscribe(
       res => {
+        this.waiting = !this.waiting;
         console.log(`Created Successfully`);
         this.router.navigateByUrl("/user/list");
       },
       err => {
+        this.waiting = !this.waiting;
         console.warn(err)
       }
     )
   }
 
   ngOnInit(): void {
+    this.syssvc.verifyLogin();
   }
 
 }

@@ -14,9 +14,12 @@ export class VendorListComponent implements OnInit {
 
   searchCriteria: string = "";
 
-  isAdmin: boolean = false;
-  isReviewer: boolean = false;
+  isAdmin(): boolean {
+    return this.syssvc.isAdmin();
+  }
   isUser: boolean = false;
+  waiting: boolean = false;
+
 
   constructor(
     private service: VendorService,
@@ -26,14 +29,16 @@ export class VendorListComponent implements OnInit {
 
   ngOnInit(): void {
     this.syssvc.verifyLogin();
+    this.waiting = !this.waiting;
     this.service.list()
       .subscribe(
         res => {
+          this.waiting = !this.waiting;
           console.log("Vendors:", res);
           this.vendors = res as Vendor[];
-          this.isAdmin = this.syssvc.isAdmin();
         },
         err => {
+          this.waiting = !this.waiting;
           console.error(err)
         }
       );

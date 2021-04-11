@@ -10,15 +10,15 @@ import { User } from '../user/user.class';
 })
 export class MenuComponent implements OnInit {
 
-  menus: any[] =[
-    {display: 'Home', route: '/home', icon: 'home'},
-    {display: 'About', route: '/about', icon: 'info'},
-    {display: 'Users', route: '/user/list', icon: 'account_circle'},
-    {display: 'Vendors', route: '/vendor/list', icon: 'store'},
-    {display: 'Products', route: '/product/list', icon: 'inventory'},
-    {display: 'Requests', route: '/request/list', icon: 'description'},
-    {display: 'Pending', route: '/request/review', icon: 'rule'},
-    {display: 'Help', route: '/help', icon: 'help'}
+  menus: any[] = [
+    { display: 'Home', route: '/home', icon: 'home' },
+    { display: 'About', route: '/about', icon: 'info' },
+    { display: 'Users', route: '/user/list', icon: 'account_circle' },
+    { display: 'Vendors', route: '/vendor/list', icon: 'store' },
+    { display: 'Products', route: '/product/list', icon: 'inventory' },
+    { display: 'Requests', route: '/request/list', icon: 'description' },
+    { display: 'Pending', route: '/request/review', icon: 'rule' },
+    { display: 'Help', route: '/help', icon: 'help' }
   ];
 
   currentUser: User = this.syssvc.loggedInUser;
@@ -46,7 +46,7 @@ export class MenuComponent implements OnInit {
       this.showLogout = this.syssvc.isLoggedIn();
       this.loggedInAs = this.syssvc.loggedInUser.firstname;
     }
-    
+
   }
 
 }

@@ -13,20 +13,22 @@ export class RequestListComponent implements OnInit {
   requests: Request[] = [];
 
   searchCriteria: string = "";
-  
+  waiting: boolean = false;
+
+
   constructor(
     private syssvc: SystemService,
     private service: RequestService,
   ) { }
-  
+
   //  injectVendorName(requests: Request[]){
-    //    for(let p of requests) {
-      //      p.vendorName = p.vendor.name;
-      //    }
-      //  }
-      
+  //    for(let p of requests) {
+  //      p.vendorName = p.vendor.name;
+  //    }
+  //  }
+
   isApproved(request: Request): boolean {
-    console.log("request:",request);
+    console.log("request:", request);
     return (request.status == "APPROVE");
   }
 
@@ -48,15 +50,18 @@ export class RequestListComponent implements OnInit {
 
   ngOnInit(): void {
     this.syssvc.verifyLogin();
+    this.waiting = !this.waiting;
     this.service.list()
-    .subscribe(
-      res => {
-        console.log("Requests:", res);
-        this.requests = res as Request[];
-      },
-      err => {
-        console.error(err)
-      }
+      .subscribe(
+        res => {
+          this.waiting = !this.waiting;
+          console.log("Requests:", res);
+          this.requests = res as Request[];
+        },
+        err => {
+          this.waiting = !this.waiting;
+          console.error(err)
+        }
       );
   }
 }

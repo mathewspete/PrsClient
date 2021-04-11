@@ -1,43 +1,63 @@
 <app-menu></app-menu>
 <main>
-    <div class="container">
-        <h3>User List</h3>
-        <span><button type="button" class="btn btn-primary btn-sm" routerLink="/user/create" [disabled]="!isAdmin()"> Add <span class="material-icons md-18">
-            add_circle
-            </span></button></span>
-        <span class="search"><input [(ngModel)]="searchCriteria" type="text" placeholder="Search"></span>
-        <table class="table table-sm table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Username</th>
-                    <th>Fullname</th>
-                    <th>Email</th>
-                    <th>Reviewer</th>
-                    <th>Admin</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let user of users | searchUser: searchCriteria">
-                    <td>{{user.id}}</td>
-                    <td>{{user.username}}</td>
-                    <td>{{user.firstname}} {{user.lastname}}</td>
-                    <td>{{user.email}}</td>
-                    <td>{{user.isReviewer | boolYN}}</td>
-                    <td>{{user.isAdmin | boolYN}}</td>
-                    <td>
-                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                            <button type="button" class="btn btn-primary btn-sm" routerLink="/user/edit/{{user.id}}" [disabled]="!isAdmin() && !isOwner(user)">Edit<span class="material-icons md-18">
-                                edit_note
-                                </span></button>
-                            <button type="button" class="btn btn-danger btn-sm" routerLink="/user/detail/{{user.id}}" [disabled]="!isAdmin()">Delete<span class="material-icons md-18">
-                                delete
-                                </span></button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+  <div class="container">
+    <div class="list-info">
+      <h3>User List</h3>
+      <button *ngIf="isAdmin()" type="button" class="btn btn-primary btn-sm" routerLink="/user/create"> Add
+        <span class="material-icons md-18">
+          add_circle
+        </span>
+      </button>
     </div>
+    <div class="filter-box">
+      <div class="search"><input [(ngModel)]="searchCriteria" type="text" placeholder="Filter"></div>
+    </div>
+    <table class="table table-sm table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Username</th>
+          <th>Name</th>
+          <th *ngIf="!isAdmin()">Phone</th>
+          <th>Email</th>
+          <th>Reviewer</th>
+          <th>Admin</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="!waiting">
+        <tr *ngFor="let user of users | searchUser: searchCriteria">
+          <td>{{user.id}}</td>
+          <td>{{user.username}}</td>
+          <td>{{user.firstname}} {{user.lastname}}</td>
+          <td *ngIf="!isAdmin()"><a href="tel:{{user.phone}}">{{user.phone}}</a></td>
+          <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
+          <td>{{user.isReviewer | boolYN}}</td>
+          <td>{{user.isAdmin | boolYN}}</td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+              <button [disabled]="!(isAdmin() || isOwner(user))" type="button" class="btn btn-primary btn-sm"
+                routerLink="/user/edit/{{user.id}}">
+                Edit
+                <span class="material-icons md-18">
+                  edit_note
+                </span></button>
+              <button *ngIf="isAdmin()" type="button" class="btn btn-danger btn-sm"
+                routerLink="/user/detail/{{user.id}}">
+                Delete
+                <span class="material-icons md-18">
+                  delete
+                </span></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="spinner">
+      <span *ngIf="waiting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      <span *ngIf="waiting">
+        Loading...
+      </span>
+    </div>
+  </div>
 </main>

@@ -12,6 +12,8 @@ import { VendorService } from '../vendor.service';
 export class VendorCreateComponent implements OnInit {
 
   vendor: Vendor = new Vendor();
+  waiting: boolean = false;
+
 
   constructor(
     private syssvc: SystemService,
@@ -19,21 +21,30 @@ export class VendorCreateComponent implements OnInit {
     private router: Router
   ) { }
 
+  isAdmin(): boolean {
+    return this.syssvc.isAdmin();
+  }
+
   save(): void {
     this.syssvc.verifyLogin();
+    this.waiting = !this.waiting;
     console.log("Before Create:", this.vendor);
     this.vendorsvc.create(this.vendor).subscribe(
       res => {
+        this.waiting = !this.waiting;
         console.log(`Created Successfully`);
         this.router.navigateByUrl("/vendor/list");
       },
       err => {
+        this.waiting = !this.waiting;
         console.warn(err)
       }
     )
   }
 
   ngOnInit(): void {
+    this.syssvc.verifyLogin();
+
   }
 
 }

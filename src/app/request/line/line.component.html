@@ -14,7 +14,7 @@
           <th *ngIf="isOwner || isAdmin || isReviewer">Action</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngIf="!waiting">
         <tr>
           <td>{{request.id}}</td>
           <td>{{request.description}}</td>
@@ -23,7 +23,7 @@
               id="reason">
           </td>
           <td>{{request.status}}</td>
-          <td>${{request.total}}</td>
+          <td>{{request.total | currency}}</td>
           <td>{{request.user.username}}</td>
           <td>
             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
@@ -31,8 +31,8 @@
                 *ngIf="isReviewer && !isOwner">Approve<span class="material-icons md-18">
                   fact_check
                 </span></button>
-              <button type="button" class="btn btn-warning btn-sm" (click)="review()"
-                *ngIf="isOwner || isAdmin">Review<span class="material-icons md-18">
+              <button [disabled]="isApproved()" type="button" class="btn btn-warning btn-sm" (click)="review()"
+                *ngIf="(isOwner || isAdmin)">Review<span class="material-icons md-18">
                   add_task
                 </span></button>
               <button type="button" class="btn btn-danger btn-sm" (click)="toggleVerify()"
@@ -48,13 +48,29 @@
         </tr>
       </tbody>
     </table>
-    <h3><span class="material-icons">
-        receipt_long
-      </span>Items</h3>
-    <span *ngIf="request"><button type="button" class="btn btn-primary btn-sm"
-        routerLink="/requestline/create/{{request.id}}" *ngIf="isOwner || isAdmin"> Add <span class="material-icons md-18">
-          add_circle
-        </span></button></span>
+    <div class="spinner">
+      <span *ngIf="waiting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      <span *ngIf="waiting">
+        Loading...
+      </span>
+    </div>
+    <div class="list-info">
+      <h3>
+        <span class="material-icons">
+          receipt_long
+        </span>
+        Items
+      </h3>
+      <span *ngIf="request">
+        <button [disabled]="isApproved()" type="button" class="btn btn-primary btn-sm"
+          routerLink="/requestline/create/{{request.id}}" *ngIf="isOwner || isAdmin">
+          Add
+          <span class="material-icons md-18">
+            add_circle
+          </span>
+        </button>
+      </span>
+    </div>
     <table class="table table-sm table-striped table-hover">
       <thead>
         <tr>
@@ -66,21 +82,21 @@
           <th *ngIf="isOwner || isAdmin">Action</th>
         </tr>
       </thead>
-      <tbody *ngIf="request">
+      <tbody *ngIf="request && !waitingRl">
         <!--<tr *ngFor="let requestline of request.requestLine | searchRequestline: searchCriteria">-->
         <tr *ngFor="let reqline of request.requestLine">
           <td>{{reqline.id}}</td>
           <td>{{reqline.product.name}}</td>
           <td>{{reqline.quantity}}</td>
-          <td>${{reqline.product.price}}</td>
-          <td>${{reqline.product.price * reqline.quantity}}</td>
+          <td>{{reqline.product.price | currency}}</td>
+          <td>{{reqline.product.price * reqline.quantity | currency}}</td>
           <td *ngIf="isOwner || isAdmin">
             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-              <button class="btn btn-primary btn-sm" routerLink="/requestline/edit/{{reqline.id}}">Edit<span
-                  class="material-icons md-18">
+              <button [disabled]="isApproved()" class="btn btn-primary btn-sm"
+                routerLink="/requestline/edit/{{reqline.id}}">Edit<span class="material-icons md-18">
                   edit_note
                 </span></button>
-              <button (click)="deleteline(reqline)" class="btn btn-danger btn-sm">Delete<span
+              <button [disabled]="isApproved()" (click)="deleteline(reqline)" class="btn btn-danger btn-sm">Delete<span
                   class="material-icons md-18">
                   delete_forever
                 </span></button>
@@ -89,5 +105,11 @@
         </tr>
       </tbody>
     </table>
+    <div class="spinner">
+      <span *ngIf="waitingRl" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      <span *ngIf="waitingRl">
+        Loading...
+      </span>
+    </div>
   </div>
 </main>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { SystemService } from 'src/app/system.service';
 import { User } from '../user.class';
@@ -14,6 +14,9 @@ export class UserLoginComponent implements OnInit {
   user: User = new User();
   id: number = 0;
   sysUser: User;
+  status: boolean = true;
+  waiting: boolean = false;
+
 
   constructor(
     private sys: SystemService,
@@ -21,20 +24,26 @@ export class UserLoginComponent implements OnInit {
     private router: Router
   ) { }
 
-  
+  reset(): void {
+    this.status = true;
+  }
 
-  login(): void{
+  login(): void {
+    this.waiting = !this.waiting;
     console.log("Before login:", this.user);
     this.usersvc.login(this.user.username, this.user.password).subscribe(
       res => {
+        this.waiting = !this.waiting;
         console.log("User:", res, "is logged in");
         this.sys.loggedInUser = res;
-        
+
         //console.log("loggedInUser:", sys.loggedInUser);
-      this.router.navigateByUrl(this.sys.returnUrl);
+        this.router.navigateByUrl(this.sys.returnUrl);
       },
       err => {
-        console.error(err);  
+        this.waiting = !this.waiting;
+        this.status = false;
+        console.error(err);
       }
     );
   }

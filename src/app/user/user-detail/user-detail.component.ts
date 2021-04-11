@@ -14,6 +14,8 @@ export class UserDetailComponent implements OnInit {
   user: User = null;
   id: number = 0;
   showVerify: boolean = false;
+  waiting: boolean = false;
+
 
   constructor(
     private syssvc: SystemService,
@@ -30,26 +32,36 @@ export class UserDetailComponent implements OnInit {
     this.router.navigateByUrl(`/user/edit/${this.id}`)
   }
 
+  isAdmin(): boolean {
+    return this.syssvc.isAdmin();
+  }
   delete(): void {
+    this.waiting = !this.waiting;
     this.service.delete(this.user).subscribe(
       res => {
+        this.waiting = !this.waiting;
         console.warn(`User ${this.user.lastname}, ${this.user.firstname} was deleted`);
         this.router.navigateByUrl('/user/list');
       },
       err => {
+        this.waiting = !this.waiting;
         console.error(err);
       }
     )
   }
 
   ngOnInit(): void {
+    this.syssvc.verifyLogin();
+    this.waiting = !this.waiting;
     this.id = this.route.snapshot.params.id;
     this.service.detail(+this.id).subscribe(
       res => {
+        this.waiting = !this.waiting;
         console.log("User:", res);
         this.user = res;
       },
       err => {
+        this.waiting = !this.waiting;
         console.error(err);
       }
     )

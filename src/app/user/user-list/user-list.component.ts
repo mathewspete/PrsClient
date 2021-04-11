@@ -11,8 +11,9 @@ import { UserService } from '../user.service';
 export class UserListComponent implements OnInit {
 
   users: User[] = [];
-
   searchCriteria: string = "";
+  waiting: boolean = false;
+
 
   constructor(
     private syssvc: SystemService,
@@ -25,7 +26,7 @@ export class UserListComponent implements OnInit {
   }
 
   isOwner(U: User) {
-    if (this.syssvc.loggedInUser == null){
+    if (this.syssvc.loggedInUser == null) {
       return false;
     } else {
       return (U.id == this.syssvc.loggedInUser.id);
@@ -33,13 +34,17 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.syssvc.verifyLogin();
+    this.waiting = !this.waiting;
     this.service.list()
       .subscribe(
         res => {
+          this.waiting = !this.waiting;
           console.log("Users:", res);
           this.users = res as User[];
         },
         err => {
+          this.waiting = !this.waiting;
           console.error(err)
         }
       );

@@ -22,6 +22,9 @@ export class RequestLineComponent implements OnInit {
   isAdmin: boolean = false;
   isReviewer: boolean = false;
   isOwner: boolean = false;
+  waiting: boolean = false;
+  waitingRl: boolean = false;
+
 
   constructor(
     private syssvc: SystemService,
@@ -35,29 +38,39 @@ export class RequestLineComponent implements OnInit {
     this.showVerify = !this.showVerify;
   }
 
+  isApproved(): boolean {
+    return this.request.status === "APPROVE";
+  }
+
   deleteline(rl: Requestline): void {
+    this.waitingRl = !this.waitingRl;
     this.requestlinesvc.delete(rl).subscribe(
       res => {
+        this.waitingRl = !this.waitingRl;
         console.warn(`Requestline ${rl.id} was deleted`);
         location.reload();
         //this.router.navigateByUrl(`/request/list`);
         //this.router.navigateByUrl(`/request/line/${this.request.id}`);
       },
       err => {
+        this.waitingRl = !this.waitingRl;
         console.error(err);
       }
     )
   }
 
   review(): void {
+    this.waiting = !this.waiting;
     console.log("Request pre review:", this.request);
     this.service.review(this.request).subscribe(
       res => {
+        this.waiting = !this.waiting;
         console.warn(`Request #${this.request.id} review`);
         console.warn(`Request review:`, this.request);
         this.router.navigateByUrl('/request/list');
       },
       err => {
+        this.waiting = !this.waiting;
         console.error(err);
       }
     )
@@ -65,45 +78,57 @@ export class RequestLineComponent implements OnInit {
   }
 
   approve(): void {
+    this.waiting = !this.waiting;
     console.log("Request pre approve:", this.request);
     this.service.approve(this.request).subscribe(
       res => {
+        this.waiting = !this.waiting;
         console.log(`Request #${this.request.id} approve`);
         this.router.navigateByUrl('/request/list');
       },
       err => {
+        this.waiting = !this.waiting;
         console.error(err);
       }
     )
   }
 
   reject(): void {
+    this.waiting = !this.waiting;
     console.log("Request pre reject:", this.request);
     this.service.reject(this.request).subscribe(
       res => {
+        this.waiting = !this.waiting;
         console.warn(`Request #${this.request.id} rejected`);
         this.router.navigateByUrl('/request/list');
       },
       err => {
+        this.waiting = !this.waiting;
         console.error(err);
       }
     )
   }
 
   ngOnInit(): void {
+    this.syssvc.verifyLogin();
+    this.waiting = !this.waiting;
+    this.waitingRl = !this.waitingRl;
     // this.syssvc.loggedInUser
     this.id = this.route.snapshot.params.id;
     this.requestlinesvc.list().subscribe(
       res => {
+        this.waiting = !this.waiting;
         console.log("Requestlines:", res);
         this.requestlines = res as Requestline[];
       },
       err => {
+        this.waiting = !this.waiting;
         err
       }
     );
     this.service.detail(+this.id).subscribe(
       res => {
+        this.waitingRl = !this.waitingRl;
         console.log("Request:", res);
         this.request = res;
         this.isOwner = (this.syssvc.loggedInUser.id === this.request.userId);
@@ -111,6 +136,7 @@ export class RequestLineComponent implements OnInit {
         this.isReviewer = this.syssvc.isReviewer();
       },
       err => {
+        this.waitingRl = !this.waitingRl;
         console.error(err);
       }
     )

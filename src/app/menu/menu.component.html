@@ -1,27 +1,29 @@
-
 <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="/home">Purchase Request System</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto mb-2 mb-sm-0">
         <li class="nav-item" *ngFor="let menu of menus">
-          <a class="nav-link" routerLink="{{menu.route}}"><span class="material-icons md-18">{{menu.icon}}</span>{{menu.display}}</a>
-          
+          <a class="nav-link" routerLink="{{menu.route}}"><span
+              class="material-icons md-18">{{menu.icon}}</span>{{menu.display}}</a>
+
         </li>
       </ul>
       <p class="greeting" *ngIf="loggedInAs">Hello, {{loggedInAs}}! </p>
       <form class="d-flex">
-        <!--<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
-        <button class="btn btn-outline-success my-2 my-sm-0" (click)="loginPage()" *ngIf="!showLogout">Login<span class="material-icons md-18">
-          login
+        <!--<input class="form-control mr-sm-2" type="text" placeholder="Filter" aria-label="Filter">-->
+        <button class="btn btn-outline-success my-2 my-sm-0" (click)="loginPage()" *ngIf="!showLogout">Login<span
+            class="material-icons md-18">
+            login
           </span></button>
-        <button class="btn btn-outline-danger my-2 my-sm-0" (click)="logout()" *ngIf="showLogout">Logout<span class="material-icons  md-18">
-          logout
+        <button class="btn btn-outline-danger my-2 my-sm-0" (click)="logout()" *ngIf="showLogout">Logout<span
+            class="material-icons  md-18">
+            logout
           </span></button>
-          <!--<app-auth-button></app-auth-button>-->
       </form>
     </div>
   </div>
@@ -63,7 +65,7 @@
       <!-- 
           <form class="form-inline waves-light" mdbWavesEffect>
             <div class="md-form my-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search">
+              <input class="form-control mr-sm-2" type="text" placeholder="Filter">
             </div>
           </form>
       --

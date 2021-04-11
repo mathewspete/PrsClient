@@ -18,6 +18,8 @@ export class RequestlineCreateComponent implements OnInit {
   requestline: Requestline = new Requestline();
   products: Product[];
   requestId: number;
+  waiting: boolean = false;
+
 
   constructor(
     private syssvc: SystemService,
@@ -27,29 +29,39 @@ export class RequestlineCreateComponent implements OnInit {
     private router: Router
   ) { }
 
+  isAdmin(): boolean {
+    return this.syssvc.isAdmin();
+  }
+
   save(): void {
     this.requestline.requestId = this.requestId;
     console.log("Before Create:", this.requestline);
     this.requestlinesvc.create(this.requestline).subscribe(
       res => {
+        this.waiting = !this.waiting;
         console.log(`Created Successfully`);
         this.router.navigateByUrl(`/request/line/${this.requestline.requestId}`);
       },
       err => {
+        this.waiting = !this.waiting;
         console.warn(err)
       }
     )
   }
 
   ngOnInit(): void {
+    this.syssvc.verifyLogin();
+
     this.requestId = +this.route.snapshot.params.rid;
     console.log("reqId:", this.requestId);
     this.productsvc.list().subscribe(
       res => {
+        this.waiting = !this.waiting;
         console.log("Products:", res);
         this.products = res as Product[];
       },
       err => {
+        this.waiting = !this.waiting;
         err
       }
     );

@@ -19,55 +19,71 @@ export class RequestCreateComponent implements OnInit {
   requestlines: Requestline[];
   users: User[];
   currentUser: number;
+  waiting: boolean = false;
+
 
   constructor(
-    private syssrv: SystemService,
+    private syssvc: SystemService,
     private requestsvc: RequestService,
     private requestlinesvc: RequestlineService,
     private usersvc: UserService,
     private router: Router
   ) { }
 
+  isAdmin(): boolean {
+    return this.syssvc.isAdmin();
+  }
+
   save(): void {
-    this.request.userId = this.syssrv.loggedInUser.id;
+    this.request.userId = this.syssvc.loggedInUser.id;
     console.log("Before Create:", this.request);
     this.requestlinesvc.list().subscribe(
       res => {
+        this.waiting = !this.waiting;
         console.log("Requestlines:", res);
         this.requestlines = res as Requestline[];
       },
       err => {
+        this.waiting = !this.waiting;
         console.error(err)
       }
     );
-    
+
     this.requestsvc.create(this.request).subscribe(
       res => {
+        this.waiting = !this.waiting;
         console.log(`Created Successfully`);
         this.router.navigateByUrl("/request/list");
       },
       err => {
+        this.waiting = !this.waiting;
         console.warn(err)
       }
     )
   }
 
   ngOnInit(): void {
+    this.syssvc.verifyLogin();
+
     this.requestlinesvc.list().subscribe(
       res => {
+        this.waiting = !this.waiting;
         console.log("Requestlines:", res);
         this.requestlines = res as Requestline[];
       },
       err => {
+        this.waiting = !this.waiting;
         err
       }
     );
     this.usersvc.list().subscribe(
       res => {
+        this.waiting = !this.waiting;
         console.log("Requestlines:", res);
         this.users = res as User[];
       },
       err => {
+        this.waiting = !this.waiting;
         err
       }
     );

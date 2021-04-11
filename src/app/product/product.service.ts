@@ -16,19 +16,19 @@ export class ProductService {
     private http: HttpClient
   ) { }
 
-  create(product: Product): Observable<Product>{
+  create(product: Product): Observable<Product> {
     return this.http.post(`${this.baseurl}`, product) as Observable<Product>;
   }
-  delete(product: Product): Observable<Product>{
+  delete(product: Product): Observable<Product> {
     return this.http.delete(`${this.baseurl}/${product.id}`) as Observable<Product>;
   }
-  detail(id: number): Observable<Product>{
+  detail(id: number): Observable<Product> {
     return this.http.get(`${this.baseurl}/${id}`) as Observable<Product>;
   }
-  edit(product: Product): Observable<any>{
+  edit(product: Product): Observable<any> {
     return this.http.put(`${this.baseurl}/${product.id}`, product) as Observable<any>;
   }
-  list(): Observable<Product[]>{
+  list(): Observable<Product[]> {
     return this.http.get(`${this.baseurl}`) as Observable<Product[]>;
   }
 

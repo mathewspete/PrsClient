@@ -14,6 +14,8 @@ export class VendorDetailComponent implements OnInit {
   vendor: Vendor = null;
   id: number = 0;
   showVerify: boolean = false;
+  waiting: boolean = false;
+
 
   constructor(
     private syssvc: SystemService,
@@ -33,10 +35,12 @@ export class VendorDetailComponent implements OnInit {
   delete(): void {
     this.service.delete(this.vendor).subscribe(
       res => {
+        this.waiting = !this.waiting;
         console.warn(`Vendor ${this.vendor.code}, ${this.vendor.name} was deleted`);
         this.router.navigateByUrl('/vendor/list');
       },
       err => {
+        this.waiting = !this.waiting;
         console.error(err);
       }
     )
@@ -44,13 +48,16 @@ export class VendorDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.syssvc.verifyLogin();
+
     this.id = this.route.snapshot.params.id;
     this.service.detail(+this.id).subscribe(
       res => {
+        this.waiting = !this.waiting;
         console.log("Vendor:", res);
         this.vendor = res;
       },
       err => {
+        this.waiting = !this.waiting;
         console.error(err);
       }
     )

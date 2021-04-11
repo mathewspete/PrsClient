@@ -8,7 +8,9 @@ export class SearchUserPipe implements PipeTransform {
 
   transform(users: User[], searchCriteria: string): User[] {
     let selectedUsers: User[] = [];
-    if(searchCriteria.length == 0) {
+    let admin: string = "admin";
+    let reviewer: string = "reviewer";
+    if (searchCriteria.length == 0) {
       return users;
     }
     for (let user of users) {
@@ -19,6 +21,8 @@ export class SearchUserPipe implements PipeTransform {
         || user.lastname.toLowerCase().includes(searchCriteria.toLowerCase())
         || (user.email != null && user.email.toLowerCase().includes(searchCriteria.toLowerCase()))
         || (user.phone != null && user.phone.toLowerCase().includes(searchCriteria.toLowerCase()))
+        || (user.isReviewer == true && reviewer.includes(searchCriteria.toLowerCase()))
+        || (user.isAdmin == true && admin.includes(searchCriteria.toLowerCase()))
       ) {
         selectedUsers.push(user);
       }

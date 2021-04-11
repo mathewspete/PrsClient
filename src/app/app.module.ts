@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from "@angular/common/http";
+import { CurrencyPipe } from "@angular/common";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
-import { UserDeleteComponent } from './user/user-delete/user-delete.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserCreateComponent } from './user/user-create/user-create.component';
 import { UserLoginComponent } from './user/user-login/user-login.component';
@@ -39,16 +41,13 @@ import { SearchRequestPipe } from './search-request.pipe';
 import { SearchRequestlinePipe } from './search-requestline.pipe';
 import { RequestLineComponent } from './request/line/line.component';
 import { RequestReviewComponent } from './request/review/review.component';
-import { CurrencyPipe } from './currency.pipe';
-import { AuthModule } from '@auth0/auth0-angular';
-import { AuthButtonComponent } from './user/auth';
+//import { HeroListPageComponent } from './99-animations/animations/animations.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
     UserDetailComponent,
-    UserDeleteComponent,
     UserEditComponent,
     UserCreateComponent,
     UserLoginComponent,
@@ -79,19 +78,16 @@ import { AuthButtonComponent } from './user/auth';
     SearchRequestPipe,
     SearchRequestlinePipe,
     RequestLineComponent,
-    RequestReviewComponent,
-    CurrencyPipe,
-    AuthButtonComponent
+    RequestReviewComponent//,
+    //HeroListPageComponent
   ],
   imports: [
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    AuthModule.forRoot({
-      domain: 'dev-q3b7syzp.us.auth0.com',
-      clientId: 'pffYyHogt5Ea2d7kT38Q457fTmSfJacv'
-    })
   ],
   providers: [],
   bootstrap: [AppComponent]

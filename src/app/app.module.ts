@@ -41,6 +41,7 @@ import { SearchRequestPipe } from './search-request.pipe';
 import { SearchRequestlinePipe } from './search-requestline.pipe';
 import { RequestLineComponent } from './request/line/line.component';
 import { RequestReviewComponent } from './request/review/review.component';
+import { RequestlineAddComponent } from './requestline/add/add.component';
 //import { HeroListPageComponent } from './99-animations/animations/animations.component';
 
 @NgModule({
@@ -78,7 +79,8 @@ import { RequestReviewComponent } from './request/review/review.component';
     SearchRequestPipe,
     SearchRequestlinePipe,
     RequestLineComponent,
-    RequestReviewComponent//,
+    RequestReviewComponent,
+    RequestlineAddComponent//,
     //HeroListPageComponent
   ],
   imports: [

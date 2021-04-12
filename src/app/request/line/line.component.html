@@ -70,6 +70,15 @@
           </span>
         </button>
       </span>
+      <span *ngIf="request">
+        <button [disabled]="isApproved()" type="button" class="btn btn-primary btn-sm" (click)="toggleAdd()"
+          *ngIf="isOwner || isAdmin">
+          Add New
+          <span class="material-icons md-18">
+            add_circle
+          </span>
+        </button>
+      </span>
     </div>
     <table class="table table-sm table-striped table-hover">
       <thead>
@@ -111,5 +120,6 @@
         Loading...
       </span>
     </div>
+    <app-requestline-add *ngIf="adding"></app-requestline-add>
   </div>
 </main>

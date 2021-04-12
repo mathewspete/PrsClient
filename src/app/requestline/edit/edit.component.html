@@ -1,50 +1,73 @@
 <app-menu></app-menu>
 <main>
-    <div class="container">
-        <div>
-            <h3>Request Edit</h3>
-        </div>
-        <div>
-            <table class="table table-sm  table-stripe table-hover" *ngIf="requestline">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <td><input [(ngModel)]="requestline.id" type="text" disabled></td>
-                    </tr>
-                    <tr>
-                        <th>Item</th>
-                        <td>
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example"
-                                [(ngModel)]="requestline.productId">
-                                <option *ngFor="let product of products" [ngValue]="product.id">${{product.price}} -
-                                    {{product.name}}</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Quantity</th>
-                        <td><input [(ngModel)]="requestline.quantity" type="number">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Price</th>
-                        <td>${{requestline.product.price}}</td>
-                        <!--<td *ngFor="let product of products" [(ngModel)]="requestline.productId">${{product.price}}</td>-->
-                    </tr>
-                    <tr>
-                        <th>Total</th>
-                        <td>${{requestline.product.price * requestline.quantity}}</td>
-                    </tr>
-                </thead>
-            </table>
-            <div class="flex">
-                <span>
-                    <button [disabled]="!(isAdmin || isOwner)" (click)="edit()"
-                        class="btn btn-primary float-right">Save<span class="material-icons md-18">
-                            save
-                        </span></button>
-                </span>
-            </div>
-        </div>
+  <div class="container">
+    <div>
+      <h3>Request Edit</h3>
     </div>
+    <div>
+      <table class="table table-sm  table-stripe table-hover" *ngIf="requestline">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <td><input [(ngModel)]="requestline.id" type="text" disabled></td>
+          </tr>
+          <tr>
+            <th>Item</th>
+            <td>
+              <!-- <select class="form-select form-select-sm" aria-label=".form-select-sm example"
+                [(ngModel)]="requestline.productId" (ngModelChange)="updatePrice()">
+                <option *ngFor="let product of products" [ngValue]="product">{{product.price | currency}}
+                  -
+                  {{product.name}}</option>
+              </select> 
+            </td>
+              </tr>-->
+          <tr>
+            <td class="prod-img"></td>
+            <td>
+              <div *ngFor="let product of products">
+                <input type="radio" id="{{product.id}}" name="product" [value]="product"
+                  [(ngModel)]="requestline.productId" (ngModelChange)="updatePrice()" />
+                <label class="label" for="allRadio">{{product.price | currency}} - {{product.name}}</label>
+              </div>
+            </td>
+          </tr>
+          </td>
+          </tr>
+          <tr>
+            <th>Quantity</th>
+            <td><input [(ngModel)]=" requestline.quantity" type="number">
+            </td>
+          </tr>
+          <tr>
+            <th>Price</th>
+            <td>{{requestline.product.price | currency}}
+            </td>
+          </tr>
+          <tr>
+            <th>Total</th>
+            <td>{{requestline.product.price * requestline.quantity | currency}}
+            </td>
+          </tr>
+          <!--<<tr>
+            <th>Price</th>
+            <td>{{displayPrice | currency}}</td>
+            <!--<td *ngFor="let product of products" [(ngModel)]="requestline.productId">${{product.price}}</td>
+          </tr>
+          <tr>
+            <th>Total</th>
+            <td>{{requestline.product.price * requestline.quantity | currency}}</td>
+          </tr>-->
+        </thead>
+      </table>
+      <div class="flex">
+        <span>
+          <button [disabled]="!(isAdmin || isOwner)" (click)="edit()" class="btn btn-primary float-right">Save<span
+              class="material-icons md-18">
+              save
+            </span></button>
+        </span>
+      </div>
+    </div>
+  </div>
 </main>

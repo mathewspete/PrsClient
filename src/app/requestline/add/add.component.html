@@ -1,0 +1,57 @@
+<div class="container product-list">
+  <div class="list-info">
+    <h3>Product List</h3>
+    <button *ngIf="isAdmin()" type="button" class="btn btn-primary btn-sm" routerLink="/product/create"> Add
+      <span class="material-icons md-18">
+        add_circle
+      </span>
+    </button>
+  </div>
+  <div class="filter-box">
+    <div class="search"><input [(ngModel)]="searchCriteria" type="text" placeholder="Filter"></div>
+  </div>
+  <div class="section">
+    <div class="item row">
+    </div>
+  </div>
+  <table class="table table-sm table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Part Number</th>
+        <th>Name</th>
+        <th>Vendor</th>
+        <th>Price</th>
+        <th>Unit</th>
+        <th>Image</th>
+        <th>Qty</th>
+      </tr>
+    </thead>
+    <tbody [@filterAnimation]="products" *ngIf="!waiting">
+      <tr *ngFor="let product of products | searchProduct: searchCriteria" class="product">
+        <td>{{product.id}}</td>
+        <td>{{product.partNbr}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.vendor.code}} - {{product.vendor.name}}</td>
+        <td>{{product.price | currency}}</td>
+        <td>{{product.unit}}</td>
+        <td>
+          <div class="image-preview">
+            <a href="{{product.photoPath}}">
+              <img class="product-preview" src="{{product.photoPath}}">
+            </a>
+          </div>
+        </td>
+        <td>
+          <input class="xxxx" id="requestline.{{product.id}}" type="number">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="spinner">
+    <span *ngIf="waiting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    <span *ngIf="waiting">
+      Loading...
+    </span>
+  </div>
+</div>

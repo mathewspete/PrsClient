@@ -17,7 +17,7 @@ export class RequestLineComponent implements OnInit {
   request: Request = null;
   requestlines: Requestline[];
   id: number = 0;
-  showVerify: boolean = false;
+  adding: boolean = false;
   users: User[];
   isAdmin: boolean = false;
   isReviewer: boolean = false;
@@ -34,8 +34,8 @@ export class RequestLineComponent implements OnInit {
     private router: Router
   ) { }
 
-  toggleVerify(): void {
-    this.showVerify = !this.showVerify;
+  toggleAdd(): void {
+    this.adding = !this.adding;
   }
 
   isApproved(): boolean {

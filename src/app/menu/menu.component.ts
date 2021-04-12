@@ -3,10 +3,11 @@ import { Router } from '@angular/router';
 import { SystemService } from '../system.service';
 import { User } from '../user/user.class';
 
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent implements OnInit {
 

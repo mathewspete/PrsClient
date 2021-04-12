@@ -23,6 +23,7 @@ main {
 
 input {
   border-radius: 8px;
+  border: thin double;
 }
 
 .form-floating:last-of-type {
@@ -110,4 +111,39 @@ div.search {
   position: absolute;
   left: 50%;
   color: #0d6efd;
+}
+
+.product-list {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: solid rgba(0, 0, 0, 0.15);
+  border-width: 1px 0;
+  box-shadow: 0px -1em 1.5em rgb(0 0 0 / 10%), 0 0.125em 0.5em rgb(0 0 0 / 15%);
+  width: 110%;
+  max-width: 1336px;
+  padding: 1rem;
+  left: -1rem;
+  position: relative;
+}
+
+img.product-preview {
+  max-width: 200px;
+}
+
+input.x {
+  width: 1em;
+}
+input.xx {
+  width: 2em;
+}
+input.xxx {
+  width: 3em;
+}
+input.xxxx {
+  width: 4em;
+}
+input.xxxxx {
+  width: 5em;
+}
+input.xxxxx {
+  width: 6em;
 }

@@ -61,6 +61,7 @@ export class RequestLineComponent implements OnInit {
 
   review(): void {
     this.waiting = !this.waiting;
+    this.request.rejectionReason = "";
     console.log("Request pre review:", this.request);
     this.service.review(this.request).subscribe(
       res => {

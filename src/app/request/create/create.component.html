@@ -12,13 +12,13 @@
                         <td><input [(ngModel)]="request.id" type="text" disabled></td>
                     </tr>
                     <tr>
-                        <th>Description</th>
-                        <td><input [(ngModel)]="request.description" type="text"></td>
-                    </tr>
-                    <tr>
                         <th>Justification</th>
                         <td><input [(ngModel)]="request.justification" type="text">
                         </td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td><input [(ngModel)]="request.description" type="text"></td>
                     </tr>
                     <tr>
                         <th>Delivery Mode</th>
@@ -28,7 +28,7 @@
             </table>
             <div class="flex">
                 <span>
-                    <button *ngIf="isAdmin()" (click)="save()" class="btn btn-primary float-right">Save<span
+                    <button (click)="save()" class="btn btn-primary float-right">Save<span
                             class="material-icons md-18">
                             save
                         </span></button>

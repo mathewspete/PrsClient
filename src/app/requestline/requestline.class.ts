@@ -1,9 +1,9 @@
 import { Product } from "../product/product.class"
 
 export class Requestline {
-    id: Number = 0;
-    requestId: Number;
+    id: number = 0;
+    requestId: number;
     quantity: number = 0;
-    productId: Number;
+    productId: number;
     product: Product;
 }

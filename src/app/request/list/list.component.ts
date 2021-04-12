@@ -28,7 +28,6 @@ export class RequestListComponent implements OnInit {
   //  }
 
   isApproved(request: Request): boolean {
-    console.log("request:", request);
     return (request.status == "APPROVE");
   }
 
@@ -42,8 +41,6 @@ export class RequestListComponent implements OnInit {
   }
 
   isAdmin(): boolean {
-    console.log("loggedinuser:", this.syssvc.loggedInUser);
-    console.log("isadmin:", this.syssvc.isAdmin());
     return this.syssvc.isAdmin();
   }
 

@@ -111,3 +111,21 @@ div.search {
   left: 50%;
   color: #0d6efd;
 }
+
+div.home-sqr {
+  padding: 1rem;
+  text-align: center;
+  background-color:#0a58ca;
+  width: 29%;
+  display: inline-block;
+  color: blanchedalmond;
+  border-radius: 16px;
+  margin: 1rem;
+}
+
+
+.material-icons.md-60 {
+  font-size: 60px;
+}
+
+.inner-login {margin: 6rem auto;}

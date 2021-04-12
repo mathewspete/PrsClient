@@ -17,12 +17,15 @@ export class RequestlineCreateComponent implements OnInit {
 
   requestline: Requestline = new Requestline();
   products: Product[];
+  request: Request;
   requestId: number;
   waiting: boolean = false;
+  ownerId: number;
 
 
   constructor(
     private syssvc: SystemService,
+    private requestsvc: RequestService,
     private requestlinesvc: RequestlineService,
     private productsvc: ProductService,
     private route: ActivatedRoute,
@@ -31,6 +34,13 @@ export class RequestlineCreateComponent implements OnInit {
 
   isAdmin(): boolean {
     return this.syssvc.isAdmin();
+  }
+  isOwner(): boolean {
+    return this.syssvc.loggedInUser.id === this.ownerId;
+  }
+
+  updatePrice(): void {
+    this.requestline.productId = +this.requestline.product.id;
   }
 
   save(): void {
@@ -49,6 +59,8 @@ export class RequestlineCreateComponent implements OnInit {
     )
   }
 
+
+
   ngOnInit(): void {
     this.syssvc.verifyLogin();
 
@@ -65,6 +77,18 @@ export class RequestlineCreateComponent implements OnInit {
         err
       }
     );
+    this.requestsvc.detail(this.requestId).subscribe(
+      res => {
+        this.waiting = !this.waiting;
+        console.log("Request:", res);
+        this.request = res;
+        this.ownerId = this.request.userId;
+      },
+      err => {
+        this.waiting = !this.waiting;
+        console.error(err);
+      }
+    )
   }
 
 }

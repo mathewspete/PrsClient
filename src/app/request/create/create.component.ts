@@ -20,6 +20,7 @@ export class RequestCreateComponent implements OnInit {
   users: User[];
   currentUser: number;
   waiting: boolean = false;
+  newId: number;
 
 
   constructor(
@@ -36,24 +37,12 @@ export class RequestCreateComponent implements OnInit {
 
   save(): void {
     this.request.userId = this.syssvc.loggedInUser.id;
-    console.log("Before Create:", this.request);
-    this.requestlinesvc.list().subscribe(
-      res => {
-        this.waiting = !this.waiting;
-        console.log("Requestlines:", res);
-        this.requestlines = res as Requestline[];
-      },
-      err => {
-        this.waiting = !this.waiting;
-        console.error(err)
-      }
-    );
-
     this.requestsvc.create(this.request).subscribe(
       res => {
         this.waiting = !this.waiting;
-        console.log(`Created Successfully`);
-        this.router.navigateByUrl("/request/list");
+        this.newId = res.id;
+        console.log(`Created Successfully`, `new req id: ${res.id}`);
+        this.router.navigateByUrl(`/request/line/${res.id}`);
       },
       err => {
         this.waiting = !this.waiting;
@@ -64,22 +53,10 @@ export class RequestCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.syssvc.verifyLogin();
-
-    this.requestlinesvc.list().subscribe(
-      res => {
-        this.waiting = !this.waiting;
-        console.log("Requestlines:", res);
-        this.requestlines = res as Requestline[];
-      },
-      err => {
-        this.waiting = !this.waiting;
-        err
-      }
-    );
     this.usersvc.list().subscribe(
       res => {
         this.waiting = !this.waiting;
-        console.log("Requestlines:", res);
+        console.log("Users:", res);
         this.users = res as User[];
       },
       err => {

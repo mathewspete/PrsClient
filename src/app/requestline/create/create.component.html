@@ -11,7 +11,6 @@
                         <th>Id</th>
                         <td><input [(ngModel)]="requestline.id" type="text" disabled></td>
                     </tr>
-
                     <tr>
                         <th>Item</th>
                         <td>
@@ -27,17 +26,11 @@
                         <td><input [(ngModel)]="requestline.quantity" type="number">
                         </td>
                     </tr>
-                    <!--
-                    <tr>
-                        <th>Total</th>
-                        <td>${{requestline.product.price * requestline.quantity}}</td>
-                    </tr>
-                -->
                 </thead>
             </table>
             <div class="flex">
                 <span>
-                    <button *ngIf="isAdmin()" (click)="save()" class="btn btn-primary float-right">Save<span
+                    <button *ngIf="isAdmin() || isOwner()" (click)="save()" class="btn btn-primary float-right">Save<span
                             class="material-icons md-18">
                             save
                         </span></button>

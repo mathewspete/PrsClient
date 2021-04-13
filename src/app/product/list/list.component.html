@@ -22,12 +22,11 @@
           <th>Price</th>
           <th>Unit</th>
           <th>Image</th>
-          <th *ngIf="isAdmin() && !getShhh()">Action</th>
+          <th *ngIf="isAdmin()">Action</th>
         </tr>
       </thead>
       <tbody [@filterAnimation]="products" *ngIf="!waiting">
-        <tr *ngFor="let product of products | searchProduct: searchCriteria" class="product"
-          (click)="setRlPid(product.id)">
+        <tr *ngFor="let product of products | searchProduct: searchCriteria" class="product">
           <td>{{product.id}}</td>
           <td>{{product.partNbr}}</td>
           <td>{{product.name}}</td>
@@ -41,7 +40,7 @@
               </a>
             </div>
           </td>
-          <td *ngIf="!getShhh()">
+          <td>
             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
               <button *ngIf="isAdmin()" type="button" class="btn btn-primary btn-sm"
                 routerLink="/product/edit/{{product.id}}">Edit<span class="material-icons md-18">

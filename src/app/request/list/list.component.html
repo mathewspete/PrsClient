@@ -29,15 +29,7 @@
           <td>{{request.id}}</td>
           <td>{{request.description}}</td>
           <td>{{request.rejectionReason}}</td>
-          <td [ngSwitch]="request.status">
-            <span class="badge badge-pill bg-warning" *ngSwitchCase="'REVIEW'">{{request.status}}</span>
-            <span class="badge badge-pill bg-warning" *ngSwitchCase="'PENDING'">{{request.status}}</span>
-            <span class="badge badge-pill bg-success" *ngSwitchCase="'APPROVE'">{{request.status}}</span>
-            <span class="badge badge-pill bg-success" *ngSwitchCase="'APPROVED'">{{request.status}}</span>
-            <span class="badge badge-pill bg-danger" *ngSwitchCase="'REJECT'">{{request.status}}</span>
-            <span class="badge badge-pill bg-danger" *ngSwitchCase="'REJECTED'">{{request.status}}</span>
-            <span class="badge badge-pill bg-info" *ngSwitchCase="'NEW'">{{request.status}}</span>
-          </td>
+          <td>{{request.status}}</td>
           <td>{{request.total | currency}}</td>
           <td>{{request.user.username}}</td>
           <td>

@@ -6,7 +6,6 @@ import { User } from 'src/app/user/user.class';
 import { RequestService } from '../request.service';
 import { Request } from '../request.class';
 import { SystemService } from 'src/app/system.service';
-import { ProductService } from 'src/app/product/product.service';
 
 @Component({
   selector: 'app-request-detail',
@@ -25,22 +24,11 @@ export class RequestLineComponent implements OnInit {
   isOwner: boolean = false;
   waiting: boolean = false;
   waitingRl: boolean = false;
-  shhh: boolean = this.requestlinesvc.shhh;
-
-  toggleShhh(): void {
-    this.requestlinesvc.passRl(this.id);
-    this.requestlinesvc.shhhToggle();
-  }
-
-  getShhh(): boolean {
-    return this.requestlinesvc.getShhh();
-  }
 
 
   constructor(
     private syssvc: SystemService,
     private service: RequestService,
-    private productsvc: ProductService,
     private requestlinesvc: RequestlineService,
     private route: ActivatedRoute,
     private router: Router
@@ -70,9 +58,6 @@ export class RequestLineComponent implements OnInit {
       }
     )
   }
-
-
-
 
   review(): void {
     this.waiting = !this.waiting;

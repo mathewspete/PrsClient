@@ -1,10 +1,7 @@
-import { SystemService } from './../../system.service';
+import { SystemService } from 'src/app/system.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Product } from 'src/app/product/product.class';
-import { ProductService } from 'src/app/product/product.service';
-import { Request } from 'src/app/request/request.class';
-import { RequestService } from 'src/app/request/request.service';
+import { Vendor } from 'src/app/vendor/vendor.class';
 import { Requestline } from '../requestline.class';
 import { RequestlineService } from '../requestline.service';
 
@@ -15,72 +12,58 @@ import { RequestlineService } from '../requestline.service';
 })
 export class RequestlineDetailComponent implements OnInit {
 
-  requestline: Requestline = new Requestline();
-  products: Product[];
-  request: Request;
-  requestId: number;
+  requestline: Requestline = null;
+  id: number = 0;
+  showVerify: boolean = false;
+  vendors: Vendor[];
   waiting: boolean = false;
-  ownerId: number;
 
 
   constructor(
     private syssvc: SystemService,
-    private requestsvc: RequestService,
-    private requestlinesvc: RequestlineService,
-    private productsvc: ProductService,
+    private service: RequestlineService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
 
+  toggleVerify(): void {
+    this.showVerify = !this.showVerify;
+  }
+
   isAdmin(): boolean {
     return this.syssvc.isAdmin();
   }
-  isOwner(): boolean {
-    return this.syssvc.loggedInUser.id === this.ownerId;
+
+
+
+  edit(): void {
+    this.router.navigateByUrl(`/requestline/edit/${this.id}`)
   }
 
-  updatePrice(): void {
-    this.requestline.productId = +this.requestline.product.id;
-  }
-
-  save(): void {
-    this.requestline.requestId = this.requestId;
-    console.log("Before Create:", this.requestline);
-    this.requestlinesvc.create(this.requestline).subscribe(
+  delete(): void {
+    this.waiting = !this.waiting;
+    this.service.delete(this.requestline).subscribe(
       res => {
         this.waiting = !this.waiting;
-        console.log(`Created Successfully`);
-        this.router.navigateByUrl(`/request/line/${this.requestline.requestId}`);
+        console.warn(`Requestline ${this.requestline.id} was deleted`);
+        this.router.navigateByUrl('/requestline/list');
       },
       err => {
         this.waiting = !this.waiting;
-        console.warn(err)
+        console.error(err);
       }
     )
   }
 
   ngOnInit(): void {
+    this.waiting = !this.waiting;
     this.syssvc.verifyLogin();
-
-    this.requestId = +this.route.snapshot.params.rid;
-    console.log("reqId:", this.requestId);
-    this.productsvc.list().subscribe(
+    this.id = this.route.snapshot.params.id;
+    this.service.detail(+this.id).subscribe(
       res => {
         this.waiting = !this.waiting;
-        console.log("Products:", res);
-        this.products = res as Product[];
-      },
-      err => {
-        this.waiting = !this.waiting;
-        err
-      }
-    );
-    this.requestsvc.detail(this.requestId).subscribe(
-      res => {
-        this.waiting = !this.waiting;
-        console.log("Request:", res);
-        this.request = res;
-        this.ownerId = this.request.userId;
+        console.log("Requestline:", res);
+        this.requestline = res;
       },
       err => {
         this.waiting = !this.waiting;
@@ -90,4 +73,3 @@ export class RequestlineDetailComponent implements OnInit {
   }
 
 }
-

@@ -1,6 +1,3 @@
-import { Router } from '@angular/router';
-import { RequestlineService } from 'src/app/requestline/requestline.service';
-import { Requestline } from './../../requestline/requestline.class';
 import { SystemService } from './../../system.service';
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product.class';
@@ -45,15 +42,14 @@ import { trigger, transition, animate, style, query, stagger } from '@angular/an
 export class ProductListComponent implements OnInit {
 
   products: Product[] = [];
-  requestline: Requestline;
+
   searchCriteria: string = "";
   waiting: boolean = false;
-  requestLineID: number;
 
   constructor(
     private syssvc: SystemService,
-    private service: ProductService,
-    private requestlinesvc: RequestlineService,
+    private service: ProductService
+
   ) { }
 
   //  injectVendorName(products: Product[]){
@@ -66,13 +62,7 @@ export class ProductListComponent implements OnInit {
     return this.syssvc.isAdmin();
   }
 
-  getShhh(): boolean {
-    return this.requestlinesvc.getShhh();
-  }
 
-  setRlPid(pid: number): void {
-    this.requestlinesvc.setRlPid(pid);
-  }
 
   ngOnInit(): void {
     this.syssvc.verifyLogin();

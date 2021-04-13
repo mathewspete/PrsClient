@@ -10,8 +10,8 @@
         <li class="nav-item" *ngFor="let menu of menus">
           <a class="nav-link" routerLink="{{menu.route}}"><span
               class="material-icons md-18">{{menu.icon}}</span>{{menu.display}}</a>
+
         </li>
-        <div *ngIf="loggedInAs" class="badge rounded-pill bg-warning">{{pendingCt}}</div>
       </ul>
       <p class="greeting" *ngIf="loggedInAs">Hello, {{loggedInAs}}! </p>
       <form class="d-flex">
@@ -33,18 +33,18 @@
 <!--Navbar --
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-primary" [containerInside]="false">
 
-    <!-- Navbar brand --
+    <!-- Navbar brand -- 
     <mdb-navbar-brand><a class="navbar-brand" href="#">Purchase Request System</a></mdb-navbar-brand>
-
+  
     <!-- Collapsible content --
     <links>
-
+  
       <!-- Links --
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" *ngFor="let menu of menus">
           <a class="nav-link waves-light" mdbWavesEffect routerLink="{{menu.route}}">{{menu.display}}</a>
         </li>
-
+  
         <!-- Dropdown --
         <li class="nav-item dropdown" dropdown>
           <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
@@ -57,12 +57,12 @@
             <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
           </div>
         </li>
-
+  
       </ul>
       <!-- Links --
-
+  
       <!-- Search form --
-      <!--
+      <!-- 
           <form class="form-inline waves-light" mdbWavesEffect>
             <div class="md-form my-0">
               <input class="form-control mr-sm-2" type="text" placeholder="Filter">
@@ -71,6 +71,6 @@
       --
     </links>
     <!-- Collapsible content --
-
+  
   </mdb-navbar>
   <!--/.Navbar -->

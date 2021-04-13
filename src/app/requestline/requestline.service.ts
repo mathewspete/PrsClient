@@ -9,8 +9,25 @@ import { Requestline } from './requestline.class';
 })
 export class RequestlineService {
 
-  baseurl: string = `${this.syssvc.domain}/api/Requestlines`
+  baseurl: string = `${this.syssvc.domain}/api/Requestlines`;
+  requestLineID: number;
+  pid: number;
 
+  shhh: boolean = true;
+
+  shhhToggle(): void {
+    console.log("shhh");
+    this.shhh = !this.shhh
+  }
+
+  getShhh(): boolean {
+    return this.shhh;
+  }
+
+  setRlPid(pid: number): void {
+    console.log("pid:", pid, "rid:", this.requestLineID);
+    this.pid = pid;
+  }
 
   constructor(
     private syssvc: SystemService,
@@ -32,5 +49,12 @@ export class RequestlineService {
   list(): Observable<Requestline[]> {
     return this.http.get(`${this.baseurl}`) as Observable<Requestline[]>;
   }
+
+
+  passRl(id: number) {
+    this.requestLineID = id;
+  }
+
+
 
 }

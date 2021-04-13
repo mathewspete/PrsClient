@@ -2,16 +2,17 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from "./user/user.class";
 
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class SystemService {
 
-  public domain: string = "http://localhost:39623"
   /*
-  public domain: string = "http://192.168.200.170:45456"
+  public domain: string = "http://localhost:39623"
   */
+  public domain: string = "http://192.168.200.170:45456"
 
   public loggedInUser: User | null = null;
 
@@ -56,11 +57,9 @@ export class SystemService {
   }
 
 
-
-
-
   constructor(
-    private router: Router
+    private router: Router,
   ) { }
+
 
 }

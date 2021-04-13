@@ -1,1 +1,46 @@
-<p>detail works!</p>
+<main>
+  <div class="container">
+    <div>
+      <h3>New Item Request</h3>
+    </div>
+    <div>
+      <table class="table table-sm  table-stripe table-hover" *ngIf="requestline">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <td>
+              <input [(ngModel)]="requestline.id" type="text" disabled>
+            </td>
+          </tr>
+          <tr>
+            <th>Item</th>
+            <td>
+              <input [(ngModel)]="requestline.productId" type="text" disabled>
+            </td>
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example"
+              [(ngModel)]="requestline.productId">
+              <option *ngFor="let product of products" [ngValue]="product.id">
+                {{product.price | currency}} - {{product.name}}
+              </option>
+            </select>
+          </tr>
+          <tr>
+            <th>Quantity</th>
+            <td><input [(ngModel)]="requestline.quantity" type="number">
+            </td>
+          </tr>
+        </thead>
+      </table>
+      <div class="flex">
+        <span>
+          <button *ngIf="isAdmin() || isOwner()" (click)="save()" class="btn btn-primary float-right">
+            Save
+            <span class="material-icons md-18">
+              save
+            </span>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+</main>

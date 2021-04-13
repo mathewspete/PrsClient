@@ -5,6 +5,131 @@
       <h3>User Create</h3>
     </div>
     <div>
+
+
+      <form class="form-floating row g-3">
+        <div class="col-md-6">
+          <label for="validationDefault01" class="form-label">First name</label>
+          <input type="text" class="form-control" id="validationDefault01" value="Mark" required>
+        </div>
+        <div class="form-floating col-md-6">
+          <label for="validationDefault02" class="form-label">Last name</label>
+          <input type="text" class="form-control" id="validationDefault02" value="Otto" required>
+        </div>
+        <div class="form-floating col-md-6">
+          <label for="validationDefaultUsername" class="form-label">Username</label>
+          <div class="input-group">
+            <span class="input-group-text" id="inputGroupPrepend2">@</span>
+            <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2"
+              required>
+          </div>
+        </div>
+        <div class="form-floating col-md-6">
+          <input type="email" class="form-control" id="floatingInputInvalid" placeholder="name@example.com"
+            value="msmith@example.com">
+          <label for="floatingInputInvalid">Invalid input</label>
+        </div>
+        <div class="form-floating col-md-6">
+          <label for="validationDefault03" class="form-label">Password</label>
+          <input type="password" class="form-control" id="validationDefault03" required>
+        </div>
+        <div class="form-floating col-md-6">
+          <label for="validationDefault04" class="form-label">ReEnter Password</label>
+          <input type="password" class="form-control" id="validationDefault04" required>
+        </div>
+        <div class="form-floating col-6">
+          <div class="form-check">
+            <input [(ngModel)]="user.isReviewer" class="form-check-input" type="checkbox" value="" id="isReviewer">
+            <label class="form-check-label" for="isReviewer">
+              Reviewer
+            </label>
+          </div>
+        </div>
+        <div class="form-floating col-6">
+          <div class="form-check">
+            <input [(ngModel)]="user.isAdmin" class="form-check-input" type="checkbox" value="" id="isAdmin">
+            <label class="form-check-label" for="isAdmin">
+              Admin
+            </label>
+          </div>
+        </div>
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">Submit form</button>
+        </div>
+      </form>
+
+      <!---
+
+      <form class="form-floating row g-3">
+        <div class="col-md-6">
+          <label for="validationServer01" class="form-label">First name</label>
+          <input type="text" class="form-control is-valid" id="validationServer01" value="First Name" required [(ngModel)]="user.lastname" >
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="validationServer02" class="form-label">Last name</label>
+          <input type="text" class="form-control is-valid" id="validationServer02" value="Last Name" required [(ngModel)]="user.firstname" >
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="validationServerUsername" class="form-label" [(ngModel)]="user.username" >Username</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text" id="inputGroupPrepend3">@</span>
+            <input type="text" class="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+              Please choose a username.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="validationServerUsername" class="form-label" [(ngModel)]="user.password" >Username</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text" id="inputGroupPrepend3">@</span>
+            <input type="text" class="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+              Please choose a username.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <input type="email" class="form-control is-invalid" id="floatingInputInvalid" placeholder="name@example.com" value="test@example.com">
+          <label for="floatingInputInvalid">Invalid input</label>
+          <div id="validationServer03Feedback" class="invalid-feedback">
+            Please provide a valid city.
+          </div>
+        </div>
+        <div class="col-md-3">
+          <label for="validationServer04" class="form-label">State</label>
+          <select class="form-select is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback" required>
+            <option selected disabled value="">Choose...</option>
+            <option>...</option>
+          </select>
+          <div id="validationServer04Feedback" class="invalid-feedback">
+            Please select a valid state.
+          </div>
+        </div>
+        <div class="col-md-3">
+          <label for="validationServer05" class="form-label">Zip</label>
+          <input type="text" class="form-control is-invalid" id="validationServer05" aria-describedby="validationServer05Feedback" required>
+          <div id="validationServer05Feedback" class="invalid-feedback">
+            Please provide a valid zip.
+          </div>
+        </div>
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">Submit form</button>
+        </div>
+      </form>
+
+
+
+
+
+
+
       <table class="table table-sm create table-stripe table-hover" *ngIf="user">
         <thead>
           <tr>
@@ -43,6 +168,8 @@
           </tr>
         </thead>
       </table>
+
+      ---->
       <div class="flex">
         <span>
           <button *ngIf="isAdmin()" (click)="save()" class="btn btn-primary float-right">Save<span

@@ -39,16 +39,29 @@ export class RequestLineComponent implements OnInit {
   }
 
   isApproved(): boolean {
-    return this.request.status === "APPROVE";
+    return this.request.status === "APPROVED";
+  }
+
+  refreshReq(): void {
+    this.request = this.request;
   }
 
   deleteline(rl: Requestline): void {
     this.waitingRl = !this.waitingRl;
     this.requestlinesvc.delete(rl).subscribe(
       res => {
-        this.waitingRl = !this.waitingRl;
         console.warn(`Requestline ${rl.id} was deleted`);
-        location.reload();
+        this.service.detail(+this.id).subscribe(
+          res => {
+            this.waitingRl = !this.waitingRl;
+            console.log("Request:", res);
+            this.request = res;
+          },
+          err => {
+            this.waitingRl = !this.waitingRl;
+            console.error(err);
+          }
+        )
         //this.router.navigateByUrl(`/request/list`);
         //this.router.navigateByUrl(`/request/line/${this.request.id}`);
       },

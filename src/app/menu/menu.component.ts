@@ -1,3 +1,5 @@
+import { Request } from './../request/request.class';
+import { RequestService } from './../request/request.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SystemService } from '../system.service';
@@ -18,21 +20,26 @@ export class MenuComponent implements OnInit {
     { display: 'Products', route: '/product/list', icon: 'inventory' },
     { display: 'Requests', route: '/request/list', icon: 'description' },
     { display: 'Pending', route: '/request/review', icon: 'rule' },
-    { display: 'Help', route: '/help', icon: 'help' }
   ];
 
   currentUser: User = this.syssvc.loggedInUser;
   showLogout: boolean = false;
   loggedInAs: string;
+  notify: number;
+  pendingCt: number;
+  requests: Request[];
 
   constructor(
     private syssvc: SystemService,
+    private requestsvc: RequestService,
     private router: Router
   ) { }
 
   loginPage() {
-    this.syssvc.returnUrl = this.router.url;
-    this.router.navigateByUrl("/login");
+    if (this.router.url != "/login") {
+      this.syssvc.returnUrl = this.router.url;
+      this.router.navigateByUrl("/login");
+    }
   }
 
   logout() {
@@ -41,12 +48,32 @@ export class MenuComponent implements OnInit {
     this.loggedInAs = null;
   }
 
+  needsReview(): boolean { 
+    return (this.syssvc.isReviewer() && (this.pendingCt > 0));
+  }
+
   ngOnInit(): void {
     if (this.syssvc.loggedInUser != null) {
       this.showLogout = this.syssvc.isLoggedIn();
       this.loggedInAs = this.syssvc.loggedInUser.firstname;
+      this.requestsvc.nonUser(this.syssvc.loggedInUser)
+        .subscribe(
+          res => {
+            console.log("Requests:", res);
+            this.requests = res as Request[];
+            this.pendingCt = this.requests.length;
+          },
+          err => {
+            console.error(err)
+            this.pendingCt - 1;
+          }
+        );
+      console.log("pendingCt:", this.pendingCt);
     }
+
+
 
   }
 
 }
+

@@ -4,7 +4,8 @@
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
     <div class="form-floating">
-      <input [(ngModel)]="user.username" type="text" class="form-control" id="floatingInput" placeholder="Username"
+      <input type="text" class="form-control" id="floatingInput" 
+      [(ngModel)]="user.username" placeholder="Username" value="user"
         (change)="reset()">
       <label for="floatingInput">Username</label>
     </div>

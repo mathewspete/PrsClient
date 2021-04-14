@@ -9,7 +9,6 @@ import { Requestline } from './requestline.class';
 })
 export class RequestlineService {
 
-<<<<<<< HEAD
   baseurl: string = `${this.syssvc.domain}/api/Requestlines`;
   requestID: number;
   pid: number;
@@ -24,10 +23,6 @@ export class RequestlineService {
   getShhh(): boolean {
     return this.shhh;
   }
-=======
-  baseurl: string = `${this.syssvc.domain}/api/Requestlines`
-
->>>>>>> origin/HEAD
 
   constructor(
     private syssvc: SystemService,
@@ -50,7 +45,6 @@ export class RequestlineService {
     return this.http.get(`${this.baseurl}`) as Observable<Requestline[]>;
   }
 
-<<<<<<< HEAD
 
   passRl(id: number) {
     this.requestID = id;
@@ -70,6 +64,4 @@ export class RequestlineService {
 
 
 
-=======
->>>>>>> origin/HEAD
 }

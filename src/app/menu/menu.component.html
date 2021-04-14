@@ -7,6 +7,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto mb-2 mb-sm-0">
+        <li class="nav-item"  (click)="goHome()">
+          <span class="navbar-nav">
+            <span class="material-icons md-18">home</span>Home
+          </span>
+        </li>
         <li class="nav-item" *ngFor="let menu of menus">
           <a class="nav-link" routerLink="{{menu.route}}"><span
               class="material-icons md-18">{{menu.icon}}</span>{{menu.display}}</a>

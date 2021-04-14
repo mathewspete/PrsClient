@@ -13,11 +13,10 @@ import { User } from '../user/user.class';
 export class MenuComponent implements OnInit {
 
   menus: any[] = [
-    { display: 'Home', route: '/home', icon: 'home' },
     { display: 'About', route: '/about', icon: 'info' },
+    { display: 'Products', route: '/product/list', icon: 'inventory' },
     { display: 'Users', route: '/user/list', icon: 'account_circle' },
     { display: 'Vendors', route: '/vendor/list', icon: 'store' },
-    { display: 'Products', route: '/product/list', icon: 'inventory' },
     { display: 'Requests', route: '/request/list', icon: 'description' },
     { display: 'Pending', route: '/request/review', icon: 'rule' },
   ];
@@ -28,6 +27,7 @@ export class MenuComponent implements OnInit {
   notify: number;
   pendingCt: number;
   requests: Request[];
+  home: string = "/home";
 
   constructor(
     private syssvc: SystemService,
@@ -41,10 +41,16 @@ export class MenuComponent implements OnInit {
       this.router.navigateByUrl("/login");
     }
   }
+  
+  goHome() {
+      this.syssvc.returnUrl = this.home;
+      return this.router.navigateByUrl("/login");
+  }
 
   logout() {
+    this.syssvc.returnUrl = "/home";
     this.syssvc.logout();
-    return this.router.navigateByUrl("/home");
+    return this.router.navigateByUrl("/login");
     this.loggedInAs = null;
   }
 

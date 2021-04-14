@@ -7,12 +7,17 @@ main {
   margin: 5rem 2%;
 }
 
+.nav-link {
+  padding: 0;
+}
+
 .navbar-dark .navbar-nav .nav-link {
   color: rgba(255, 255, 255, 0.5);
 }
 
 .navbar-nav {
   margin-right: auto;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .float-left {

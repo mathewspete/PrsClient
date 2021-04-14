@@ -1,5 +1,5 @@
 import { SystemService } from './../../system.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/product/product.class';
 import { ProductService } from 'src/app/product/product.service';
@@ -7,6 +7,7 @@ import { Request } from 'src/app/request/request.class';
 import { RequestService } from 'src/app/request/request.service';
 import { Requestline } from '../requestline.class';
 import { RequestlineService } from '../requestline.service';
+import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-requestline-detail',
@@ -15,12 +16,15 @@ import { RequestlineService } from '../requestline.service';
 })
 export class RequestlineDetailComponent implements OnInit {
 
+  @Input() productId: number;
+
   requestline: Requestline = new Requestline();
   products: Product[];
   request: Request;
   requestId: number;
   waiting: boolean = false;
   ownerId: number;
+  closeResult: string = '';
 
 
   constructor(
@@ -29,8 +33,17 @@ export class RequestlineDetailComponent implements OnInit {
     private requestlinesvc: RequestlineService,
     private productsvc: ProductService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal,
+    public activeModal: NgbActiveModal,
   ) { }
+
+  passRl(id: number) {
+    this.requestId = id;
+  }
+
+
+
 
   isAdmin(): boolean {
     return this.syssvc.isAdmin();
@@ -43,7 +56,8 @@ export class RequestlineDetailComponent implements OnInit {
     this.requestline.productId = +this.requestline.product.id;
   }
 
-  save(): void {
+  save(productId: number): void {
+    this.requestline.productId = this.requestlinesvc.getProductId();
     this.requestline.requestId = this.requestId;
     console.log("Before Create:", this.requestline);
     this.requestlinesvc.create(this.requestline).subscribe(
@@ -62,7 +76,7 @@ export class RequestlineDetailComponent implements OnInit {
   ngOnInit(): void {
     this.syssvc.verifyLogin();
 
-    this.requestId = +this.route.snapshot.params.rid;
+    this.requestId = this.requestlinesvc.getRequestId();
     console.log("reqId:", this.requestId);
     this.productsvc.list().subscribe(
       res => {

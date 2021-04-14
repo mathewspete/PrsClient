@@ -151,3 +151,7 @@ div.home-sqr:hover {
 div.rounded-pill {
   height: 1.25rem;
 }
+
+#quantity {
+  margin: 0 8px;
+}

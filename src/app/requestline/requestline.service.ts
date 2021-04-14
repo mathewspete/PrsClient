@@ -10,7 +10,7 @@ import { Requestline } from './requestline.class';
 export class RequestlineService {
 
   baseurl: string = `${this.syssvc.domain}/api/Requestlines`;
-  requestLineID: number;
+  requestID: number;
   pid: number;
 
   shhh: boolean = true;
@@ -22,11 +22,6 @@ export class RequestlineService {
 
   getShhh(): boolean {
     return this.shhh;
-  }
-
-  setRlPid(pid: number): void {
-    console.log("pid:", pid, "rid:", this.requestLineID);
-    this.pid = pid;
   }
 
   constructor(
@@ -52,7 +47,19 @@ export class RequestlineService {
 
 
   passRl(id: number) {
-    this.requestLineID = id;
+    this.requestID = id;
+  }
+
+  setRlPid(pid: number): void {
+    console.log("pid:", pid, "rid:", this.requestID);
+    this.pid = pid;
+  }
+
+  getProductId() {
+    return this.pid;
+  }
+  getRequestId() {
+    return this.requestID;
   }
 
 

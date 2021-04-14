@@ -8,6 +8,8 @@
           add_circle
         </span>
       </button>
+
+
     </div>
     <div class="filter-box">
       <div class="search"><input [(ngModel)]="searchCriteria" type="text" placeholder="Filter"></div>
@@ -16,24 +18,20 @@
       <thead>
         <tr>
           <th>Id</th>
-          <th>Part Number</th>
+          <th>Unit</th>
+          <th>Price</th>
+          <th>Image</th>
           <th>Name</th>
           <th>Vendor</th>
-          <th>Price</th>
-          <th>Unit</th>
-          <th>Image</th>
+          <th>Part Number</th>
           <th *ngIf="isAdmin() && !getShhh()">Action</th>
         </tr>
       </thead>
       <tbody [@filterAnimation]="products" *ngIf="!waiting">
-        <tr *ngFor="let product of products | searchProduct: searchCriteria" class="product"
-          (click)="setRlPid(product.id)">
+        <tr *ngFor="let product of products | searchProduct: searchCriteria" class="product" (click)="open(product.id)">
           <td>{{product.id}}</td>
-          <td>{{product.partNbr}}</td>
-          <td>{{product.name}}</td>
-          <td>{{product.vendor.code}} - {{product.vendor.name}}</td>
-          <td>{{product.price | currency}}</td>
           <td>{{product.unit}}</td>
+          <td>{{product.price | currency}}</td>
           <td>
             <div class="image-preview">
               <a href="{{product.photoPath}}">
@@ -41,6 +39,9 @@
               </a>
             </div>
           </td>
+          <td>{{product.name}}</td>
+          <td>{{product.vendor.code}} - {{product.vendor.name}}</td>
+          <td>{{product.partNbr}}</td>
           <td *ngIf="!getShhh()">
             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
               <button *ngIf="isAdmin()" type="button" class="btn btn-primary btn-sm"

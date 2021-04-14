@@ -28,7 +28,7 @@ export class RequestLineComponent implements OnInit {
   shhh: boolean = this.requestlinesvc.shhh;
 
   toggleShhh(): void {
-    this.requestlinesvc.passRl(this.id);
+    this.requestlinesvc.passRl(+this.request.id);
     this.requestlinesvc.shhhToggle();
   }
 

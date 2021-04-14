@@ -1,3 +1,27 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Add Item</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form *ngIf="requestline">
+    <div class="form-group" *ngIf="requestline">
+      <label for="quantity" class="form-label">Quantity</label>
+      <input [(ngModel)]="requestline.quantity" type="number" id="quantity" name="quantity" ngbAutofocus>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button *ngIf="isAdmin() || isOwner()" (click)="save()" class="btn btn-primary float-right">
+    Save
+    <span class="material-icons md-18">
+      save
+    </span>
+  </button>
+</div>
+
+<!--
 <main>
   <div class="container">
     <div>
@@ -44,3 +68,4 @@
     </div>
   </div>
 </main>
+-->

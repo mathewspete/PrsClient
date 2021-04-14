@@ -61,7 +61,8 @@
         </span>
         Items
       </h3>
-      <span *ngIf="request">
+      <!--
+        <span *ngIf="request">
         <button [disabled]="isApproved()" type="button" class="btn btn-primary btn-sm"
           routerLink="/requestline/create/{{request.id}}" *ngIf="isOwner || isAdmin">
           Add
@@ -69,11 +70,11 @@
             add_circle
           </span>
         </button>
-      </span>
+      </span>--->
       <span>
         <button [disabled]="isApproved()" type="button" class="btn btn-primary btn-sm" (click)="toggleShhh()"
           *ngIf="isOwner || isAdmin">
-          Add Shhh
+          Add
           <span class="material-icons md-18">
             add_circle
           </span>

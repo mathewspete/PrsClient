@@ -2,10 +2,12 @@ import { Router } from '@angular/router';
 import { RequestlineService } from 'src/app/requestline/requestline.service';
 import { Requestline } from './../../requestline/requestline.class';
 import { SystemService } from './../../system.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../product.class';
 import { ProductService } from '../product.service';
 import { trigger, transition, animate, style, query, stagger } from '@angular/animations';
+import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { RequestlineDetailComponent } from 'src/app/requestline/detail/detail.component';
 
 @Component({
   selector: 'app-product-list',
@@ -45,16 +47,21 @@ import { trigger, transition, animate, style, query, stagger } from '@angular/an
 export class ProductListComponent implements OnInit {
 
   products: Product[] = [];
-  requestline: Requestline;
   searchCriteria: string = "";
   waiting: boolean = false;
-  requestLineID: number;
+  requestlineInfo: number;
+  rid: number;
 
   constructor(
     private syssvc: SystemService,
     private service: ProductService,
     private requestlinesvc: RequestlineService,
-  ) { }
+    private modalService: NgbModal,
+  ) {
+    //this.modalService.activeInstances.subscribe((list) => {
+    //    this.modalsNumber = list.length;
+    //});
+  }
 
   //  injectVendorName(products: Product[]){
   //    for(let p of products) {
@@ -72,6 +79,8 @@ export class ProductListComponent implements OnInit {
 
   setRlPid(pid: number): void {
     this.requestlinesvc.setRlPid(pid);
+    this.requestlineInfo = pid;
+
   }
 
   ngOnInit(): void {
@@ -90,4 +99,53 @@ export class ProductListComponent implements OnInit {
         }
       );
   }
+
+  open(pid: number) {
+    this.requestlinesvc.setRlPid(pid);
+    const modalRef = this.modalService.open(RequestlineDetailComponent);
+    modalRef.componentInstance.productId = pid;
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
 }
+
+
+@Component({
+  template: `
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="dateOfBirth">Date of birth</label>
+        <input ngbAutofocus type="number">
+      </div>
+    </form>
+    <ul>
+      <li>{{requestlineInfo}}</li>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Save click')">Save</button>
+  </div>
+  `
+})
+export class NgbdModalContent {
+  @Input() requestlineInfo: number;
+
+  constructor(public activeModal: NgbActiveModal) { }
+}
+

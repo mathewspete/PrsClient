@@ -36,14 +36,20 @@ export class MenuComponent implements OnInit {
   ) { }
 
   loginPage() {
-    this.syssvc.returnUrl = this.router.url;
-    this.router.navigateByUrl("/login");
+    if (this.router.url != "/login") {
+      this.syssvc.returnUrl = this.router.url;
+      this.router.navigateByUrl("/login");
+    }
   }
 
   logout() {
     this.syssvc.logout();
     return this.router.navigateByUrl("/home");
     this.loggedInAs = null;
+  }
+
+  needsReview(): boolean { 
+    return (this.syssvc.isReviewer() && (this.pendingCt > 0));
   }
 
   ngOnInit(): void {

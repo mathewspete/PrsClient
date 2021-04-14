@@ -28,7 +28,7 @@ export class RequestListComponent implements OnInit {
   //  }
 
   isApproved(request: Request): boolean {
-    return (request.status == "APPROVE");
+    return (request.status == "APPROVED");
   }
 
   isOwner(request: Request): boolean {

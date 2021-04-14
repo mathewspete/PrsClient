@@ -27,8 +27,8 @@
           <td>{{request.user.username}}</td>
           <td>
             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-              <button type="button" class="btn btn-success btn-sm" (click)="approve()" *ngIf="isReviewer && !isOwner"
-                [disabled]="isApproved()">Approve<span class="material-icons md-18">
+              <button type="button" class="btn btn-success btn-sm" (click)="approve()"
+                *ngIf="isReviewer && !isOwner">Approve<span class="material-icons md-18">
                   fact_check
                 </span></button>
               <button [disabled]="isApproved()" type="button" class="btn btn-warning btn-sm" (click)="review()"
@@ -36,7 +36,7 @@
                   add_task
                 </span></button>
               <button type="button" class="btn btn-danger btn-sm" (click)="toggleVerify()"
-                *ngIf="!showVerify && (isReviewer)" [disabled]="isApproved()">Reject<span class="material-icons md-18">
+                *ngIf="!showVerify && (isReviewer)">Reject<span class="material-icons md-18">
                   thumb_down_alt
                 </span></button>
               <button type="button" class="btn btn-danger btn-sm" (click)="reject()" *ngIf="showVerify">Confirm
@@ -70,6 +70,7 @@
             add_circle
           </span>
         </button>
+<<<<<<< HEAD
       </span>--->
       <span>
         <button [disabled]="isApproved()" type="button" class="btn btn-primary btn-sm" (click)="toggleShhh()"
@@ -81,6 +82,9 @@
         </button>
       </span>
 
+=======
+      </span>
+>>>>>>> origin/HEAD
     </div>
     <table class="table table-sm table-striped table-hover">
       <thead>
@@ -123,5 +127,4 @@
       </span>
     </div>
   </div>
-  <app-product-list *ngIf="!getShhh()"></app-product-list>
 </main>

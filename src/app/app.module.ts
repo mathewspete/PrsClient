@@ -41,7 +41,6 @@ import { SearchRequestPipe } from './search-request.pipe';
 import { SearchRequestlinePipe } from './search-requestline.pipe';
 import { RequestLineComponent } from './request/line/line.component';
 import { RequestReviewComponent } from './request/review/review.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { HeroListPageComponent } from './99-animations/animations/animations.component';
 
 @NgModule({
@@ -89,7 +88,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

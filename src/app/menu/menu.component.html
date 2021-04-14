@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/home">Purchase Request System</a>
+    <a class="navbar-brand" href="/home">PRS</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
       aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -11,7 +11,7 @@
           <a class="nav-link" routerLink="{{menu.route}}"><span
               class="material-icons md-18">{{menu.icon}}</span>{{menu.display}}</a>
         </li>
-        <div *ngIf="loggedInAs" class="badge rounded-pill bg-warning">{{pendingCt}}</div>
+        <div *ngIf="needsReview() " class="badge rounded-pill bg-warning">{{pendingCt}}</div>
       </ul>
       <p class="greeting" *ngIf="loggedInAs">Hello, {{loggedInAs}}! </p>
       <form class="d-flex">

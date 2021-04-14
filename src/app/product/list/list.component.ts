@@ -1,6 +1,3 @@
-import { Router } from '@angular/router';
-import { RequestlineService } from 'src/app/requestline/requestline.service';
-import { Requestline } from './../../requestline/requestline.class';
 import { SystemService } from './../../system.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../product.class';
@@ -8,6 +5,7 @@ import { ProductService } from '../product.service';
 import { trigger, transition, animate, style, query, stagger } from '@angular/animations';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { RequestlineDetailComponent } from 'src/app/requestline/detail/detail.component';
+import { RequestlineService } from 'src/app/requestline/requestline.service';
 
 @Component({
   selector: 'app-product-list',
@@ -73,9 +71,6 @@ export class ProductListComponent implements OnInit {
     return this.syssvc.isAdmin();
   }
 
-  getShhh(): boolean {
-    return this.requestlinesvc.getShhh();
-  }
 
   setRlPid(pid: number): void {
     this.requestlinesvc.setRlPid(pid);

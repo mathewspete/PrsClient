@@ -94,7 +94,7 @@ export class RequestlineDetailComponent implements OnInit {
         this.waiting = !this.waiting;
         console.log("Request:", res);
         this.request = res;
-        this.ownerId = this.request.userId;
+        //        this.ownerId = this.request.userId;
       },
       err => {
         this.waiting = !this.waiting;
@@ -104,4 +104,3 @@ export class RequestlineDetailComponent implements OnInit {
   }
 
 }
-

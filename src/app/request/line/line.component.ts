@@ -18,7 +18,7 @@ export class RequestLineComponent implements OnInit {
   request: Request = null;
   //requestlines: Requestline[];
   id: number = 0;
-  showVerify: boolean = false;
+  showReason: boolean = false;
   users: User[];
   isAdmin: boolean = false;
   isReviewer: boolean = false;
@@ -41,15 +41,14 @@ export class RequestLineComponent implements OnInit {
     private syssvc: SystemService,
     private service: RequestService,
     private requestlinesvc: RequestlineService,
-    private lineitemssvc: LineitemsService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
 
 
 
-  toggleVerify(): void {
-    this.showVerify = !this.showVerify;
+  toggleReason(): void {
+    this.showReason = !this.showReason;
   }
 
   isApproved(): boolean {
@@ -140,25 +139,13 @@ export class RequestLineComponent implements OnInit {
   ngOnInit(): void {
     this.syssvc.verifyLogin();
     this.waiting = !this.waiting;
-    // this.syssvc.loggedInUser
+    this.syssvc.loggedInUser
     this.id = this.route.snapshot.params.id;
-    /*
-    this.requestlinesvc.getByRequestID(this.id).subscribe(
-      res => {
-        this.waiting = !this.waiting;
-        console.log("Requestlines:", res);
-        this.requestlines = res as Requestline[];
-      },
-      err => {
-        this.waiting = !this.waiting;
-        err
-      }
-    );
-    */
     this.service.detail(this.id).subscribe(
       res => {
         console.log("Request:", res);
         this.request = res;
+        this.isOwner = (this.syssvc.loggedInUser.id == this.request.userId);
         this.isAdmin = this.syssvc.isAdmin();
         this.isReviewer = this.syssvc.isReviewer();
         this.waiting = !this.waiting;

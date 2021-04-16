@@ -8,6 +8,7 @@ import { RequestService } from 'src/app/request/request.service';
 import { Requestline } from '../requestline.class';
 import { RequestlineService } from '../requestline.service';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { LineitemsService } from '../lineitems.service';
 
 @Component({
   selector: 'app-requestline-detail',
@@ -15,8 +16,6 @@ import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-
   styleUrls: ['./detail.component.css']
 })
 export class RequestlineDetailComponent implements OnInit {
-
-  @Input() productId: number;
 
   requestline: Requestline = new Requestline();
   products: Product[];
@@ -29,6 +28,7 @@ export class RequestlineDetailComponent implements OnInit {
 
   constructor(
     private syssvc: SystemService,
+    private lineitemsvc: LineitemsService,
     private requestsvc: RequestService,
     private requestlinesvc: RequestlineService,
     private productsvc: ProductService,
@@ -56,15 +56,32 @@ export class RequestlineDetailComponent implements OnInit {
     this.requestline.productId = +this.requestline.product.id;
   }
 
+
+  sendTextValue() {
+    this.lineitemsvc.passValue(this.requestId);
+  }
+
   save(productId: number): void {
     this.requestline.productId = this.requestlinesvc.getProductId();
     this.requestline.requestId = this.requestId;
     console.log("Before Create:", this.requestline);
     this.requestlinesvc.create(this.requestline).subscribe(
       res => {
-        this.waiting = !this.waiting;
         console.log(`Created Successfully`);
         this.router.navigateByUrl(`/request/line/${this.requestline.requestId}`);
+        this.sendTextValue();
+        this.requestlinesvc.getByRequestID(this.requestId).subscribe(
+          res => {
+            this.waiting = !this.waiting;
+            console.log(`Created Successfully`);
+            this.router.navigateByUrl(`/request/line/${this.requestline.requestId}`);
+            this.sendTextValue();
+          },
+          err => {
+            this.waiting = !this.waiting;
+            console.warn(err)
+          }
+        )
       },
       err => {
         this.waiting = !this.waiting;
@@ -73,11 +90,13 @@ export class RequestlineDetailComponent implements OnInit {
     )
   }
 
+
+
   ngOnInit(): void {
     this.syssvc.verifyLogin();
 
-    this.requestId = this.requestlinesvc.getRequestId();
-    console.log("reqId:", this.requestId);
+    this.requestId = this.requestlinesvc.requestID;
+    console.log("reqId:", +this.requestId);
     this.productsvc.list().subscribe(
       res => {
         this.waiting = !this.waiting;
@@ -94,7 +113,7 @@ export class RequestlineDetailComponent implements OnInit {
         this.waiting = !this.waiting;
         console.log("Request:", res);
         this.request = res;
-        //        this.ownerId = this.request.userId;
+        this.ownerId = this.request.userId;
       },
       err => {
         this.waiting = !this.waiting;

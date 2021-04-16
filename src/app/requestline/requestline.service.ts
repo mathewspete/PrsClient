@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { SystemService } from '../system.service';
 import { Requestline } from './requestline.class';
 
@@ -44,6 +44,40 @@ export class RequestlineService {
   list(): Observable<Requestline[]> {
     return this.http.get(`${this.baseurl}`) as Observable<Requestline[]>;
   }
+
+
+
+  getByRequestID(rid: number): Observable<Requestline[]> {
+    this.requestID = rid;
+    return this.http.get(`${this.baseurl}/request/${rid}`) as Observable<Requestline[]>;
+  }
+
+
+  followedList: Requestline[];
+
+
+  public items = new Subject<Requestline[]>();
+
+  passValue(rid) {
+    this.getByRequestID(rid).subscribe(
+      res => {
+        console.log("Requestlines from requestline/request:", res);
+        this.followedList = res as Requestline[];
+      },
+      err => {
+        err
+      }
+    );
+    this.items.next(this.followedList);
+  }
+
+  getUpdate(): Observable<any> { //the receiver component calls this function
+    return this.items.asObservable(); //it returns as an observable to which the receiver funtion will subscribe
+  }
+
+
+
+
 
 
   passRl(id: number) {

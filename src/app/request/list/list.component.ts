@@ -15,7 +15,6 @@ export class RequestListComponent implements OnInit {
   searchCriteria: string = "";
   waiting: boolean = false;
 
-
   constructor(
     private syssvc: SystemService,
     private service: RequestService,

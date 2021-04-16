@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Requestline } from 'src/app/requestline/requestline.class';
 import { RequestlineService } from 'src/app/requestline/requestline.service';
@@ -6,16 +6,17 @@ import { User } from 'src/app/user/user.class';
 import { RequestService } from '../request.service';
 import { Request } from '../request.class';
 import { SystemService } from 'src/app/system.service';
+import { LineitemsService } from 'src/app/requestline/lineitems.service';
 
 @Component({
-  selector: 'app-request-detail',
+  selector: 'app-request-line',
   templateUrl: './line.component.html',
   styleUrls: ['./line.component.css']
 })
 export class RequestLineComponent implements OnInit {
 
   request: Request = null;
-  requestlines: Requestline[];
+  //requestlines: Requestline[];
   id: number = 0;
   showVerify: boolean = false;
   users: User[];
@@ -40,9 +41,12 @@ export class RequestLineComponent implements OnInit {
     private syssvc: SystemService,
     private service: RequestService,
     private requestlinesvc: RequestlineService,
+    private lineitemssvc: LineitemsService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
+
+
 
   toggleVerify(): void {
     this.showVerify = !this.showVerify;
@@ -136,10 +140,10 @@ export class RequestLineComponent implements OnInit {
   ngOnInit(): void {
     this.syssvc.verifyLogin();
     this.waiting = !this.waiting;
-    this.waitingRl = !this.waitingRl;
     // this.syssvc.loggedInUser
     this.id = this.route.snapshot.params.id;
-    this.requestlinesvc.list().subscribe(
+    /*
+    this.requestlinesvc.getByRequestID(this.id).subscribe(
       res => {
         this.waiting = !this.waiting;
         console.log("Requestlines:", res);
@@ -150,20 +154,20 @@ export class RequestLineComponent implements OnInit {
         err
       }
     );
-    this.service.detail(+this.id).subscribe(
+    */
+    this.service.detail(this.id).subscribe(
       res => {
-        this.waitingRl = !this.waitingRl;
         console.log("Request:", res);
         this.request = res;
-        this.isOwner = (this.syssvc.loggedInUser.id === this.request.userId);
         this.isAdmin = this.syssvc.isAdmin();
         this.isReviewer = this.syssvc.isReviewer();
+        this.waiting = !this.waiting;
       },
       err => {
-        this.waitingRl = !this.waitingRl;
+        this.waiting = !this.waiting;
         console.error(err);
       }
-    )
+    );
   }
 
 }

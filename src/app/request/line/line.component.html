@@ -1,7 +1,7 @@
 <app-menu></app-menu>
 <main>
   <div class="container">
-    <h3>Request</h3>
+    <h3><span class="material-icons">description</span>Request</h3>
     <table class="table table-sm table-striped table-hover" *ngIf="request">
       <thead>
         <tr>
@@ -54,6 +54,9 @@
         Loading...
       </span>
     </div>
+    <app-requested></app-requested>
+
+    <!--
     <div class="list-info">
       <h3>
         <span class="material-icons">
@@ -61,6 +64,8 @@
         </span>
         Items
       </h3>
+
+
       <!--
         <span *ngIf="request">
         <button [disabled]="isApproved()" type="button" class="btn btn-primary btn-sm"
@@ -70,8 +75,9 @@
             add_circle
           </span>
         </button>
-<<<<<<< HEAD
-      </span>--->
+      </span>
+
+
       <span>
         <button [disabled]="isApproved()" type="button" class="btn btn-primary btn-sm" (click)="toggleShhh()"
           *ngIf="isOwner || isAdmin">
@@ -82,9 +88,6 @@
         </button>
       </span>
 
-=======
-      </span>
->>>>>>> origin/HEAD
     </div>
     <table class="table table-sm table-striped table-hover">
       <thead>
@@ -97,10 +100,11 @@
           <th *ngIf="isOwner || isAdmin">Action</th>
         </tr>
       </thead>
+
+
       <tbody *ngIf="request && !waitingRl">
-        <!--<tr *ngFor="let requestline of request.requestLine | searchRequestline: searchCriteria">-->
         <tr *ngFor="let reqline of request.requestLine">
-          <td>{{reqline.id}}</td>
+         <td>{{reqline.id}}</td>
           <td>{{reqline.product.name}}</td>
           <td>{{reqline.quantity}}</td>
           <td>{{reqline.product.price | currency}}</td>
@@ -126,5 +130,9 @@
         Loading...
       </span>
     </div>
+    -->
+  </div>
+  <div class="containter">
+    <app-product-list *ngIf="getShhh()"></app-product-list>
   </div>
 </main>

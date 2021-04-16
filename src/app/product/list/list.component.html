@@ -2,7 +2,7 @@
 <main>
   <div class="container">
     <div class="list-info">
-      <h3>Product List</h3>
+      <h3><span class="material-icons">store</span>Product List</h3>
       <button *ngIf="isAdmin()" type="button" class="btn btn-primary btn-sm" routerLink="/product/create"> Add
         <span class="material-icons md-18">
           add_circle
@@ -21,7 +21,6 @@
           <th>Unit</th>
           <th>Price</th>
           <th>Image</th>
-<<<<<<< HEAD
           <th>Name</th>
           <th>Vendor</th>
           <th>Part Number</th>
@@ -30,13 +29,6 @@
       </thead>
       <tbody [@filterAnimation]="products" *ngIf="!waiting">
         <tr *ngFor="let product of products | searchProduct: searchCriteria" class="product" (click)="open(product.id)">
-=======
-          <th *ngIf="isAdmin()">Action</th>
-        </tr>
-      </thead>
-      <tbody [@filterAnimation]="products" *ngIf="!waiting">
-        <tr *ngFor="let product of products | searchProduct: searchCriteria" class="product">
->>>>>>> origin/HEAD
           <td>{{product.id}}</td>
           <td>{{product.unit}}</td>
           <td>{{product.price | currency}}</td>
@@ -47,14 +39,10 @@
               </a>
             </div>
           </td>
-<<<<<<< HEAD
           <td>{{product.name}}</td>
           <td>{{product.vendor.code}} - {{product.vendor.name}}</td>
           <td>{{product.partNbr}}</td>
           <td *ngIf="!getShhh()">
-=======
-          <td>
->>>>>>> origin/HEAD
             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
               <button *ngIf="isAdmin()" type="button" class="btn btn-primary btn-sm"
                 routerLink="/product/edit/{{product.id}}">Edit<span class="material-icons md-18">

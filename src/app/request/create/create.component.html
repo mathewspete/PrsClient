@@ -1,39 +1,45 @@
 <app-menu></app-menu>
 <main>
-    <div class="container">
-        <div>
-            <h3>New Request</h3>
-        </div>
-        <div>
-            <table class="table table-sm  table-stripe table-hover" *ngIf="request">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <td><input [(ngModel)]="request.id" type="text" disabled></td>
-                    </tr>
-                    <tr>
-                        <th>Justification</th>
-                        <td><input [(ngModel)]="request.justification" type="text">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Description</th>
-                        <td><input [(ngModel)]="request.description" type="text"></td>
-                    </tr>
-                    <tr>
-                        <th>Delivery Mode</th>
-                        <td><input [(ngModel)]="request.deliveryMode" type="text"></td>
-                    </tr>
-                </thead>
-            </table>
-            <div class="flex">
-                <span>
-                    <button (click)="save()" class="btn btn-primary float-right">Save<span
-                            class="material-icons md-18">
-                            save
-                        </span></button>
-                </span>
-            </div>
-        </div>
+  <div class="container">
+    <div>
+      <h3>New Request</h3>
     </div>
+    <div>
+      <table class="table table-sm  table-stripe table-hover" *ngIf="request">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <td><input [(ngModel)]="request.id" type="text" disabled></td>
+          </tr>
+          <tr>
+            <th>Justification</th>
+            <td><input [(ngModel)]="request.justification" type="text">
+            </td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td><input [(ngModel)]="request.description" type="text"></td>
+          </tr>
+          <tr>
+            <th>Date Needed</th>
+            <td><input [(ngModel)]="request.dateNeeded" type="date"></td>
+          </tr>
+          <tr>
+            <th>Delivery Mode</th>
+            <td><input [(ngModel)]="request.deliveryMode" type="text"></td>
+          </tr>
+        </thead>
+      </table>
+      <div class="flex">
+        <span>
+          <button (click)="save()" class="btn btn-primary float-right">
+            Save
+            <span class="material-icons md-18">
+              save
+            </span>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
 </main>

@@ -7,7 +7,7 @@
   </h3>
   <span>
     <button [disabled]="isApproved()" type="button" class="btn btn-primary btn-sm" (click)="toggleShhh()"
-      *ngIf="isOwner || isAdmin">
+      *ngIf="isOwner || isAdmin()">
       Add
       <span class="material-icons md-18">
         add_circle
@@ -21,10 +21,11 @@
     <tr>
       <th>Id</th>
       <th>Item</th>
+      <!--<th *ngIf="isReviewer()">Vendor</th>-->
       <th>Qty</th>
       <th>Price</th>
       <th>Total</th>
-      <th *ngIf="isOwner || isAdmin">Action</th>
+      <th *ngIf="isOwner || isAdmin()">Action</th>
     </tr>
   </thead>
   <tbody *ngIf="requestlines && !waitingRl">
@@ -32,10 +33,11 @@
     <tr *ngFor="let reqline of requestlines">
       <td>{{reqline.id}}</td>
       <td>{{reqline.product.name}}</td>
+      <!--<td *ngIf="isReviewer()">{{reqline.vendor.code}}</td>-->
       <td>{{reqline.quantity}}</td>
       <td>{{reqline.product.price | currency}}</td>
       <td>{{reqline.product.price * reqline.quantity | currency}}</td>
-      <td *ngIf="isOwner || isAdmin">
+      <td *ngIf="isOwner || isAdmin()">
         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
           <button [disabled]="isApproved()" class="btn btn-primary btn-sm"
             routerLink="/requestline/edit/{{reqline.id}}">Edit<span class="material-icons md-18">

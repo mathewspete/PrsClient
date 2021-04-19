@@ -10,8 +10,9 @@ export class SystemService {
 
   /*
   public domain: string = "http://localhost:39623"
-  */
   public domain: string = "http://192.168.200.170:45456"
+  */
+  public domain: string = "http://localhost:5000"
 
   public loggedInUser: User | null = null;
 

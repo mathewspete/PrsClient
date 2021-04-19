@@ -19,6 +19,7 @@ export class ProductListComponent implements OnInit {
   waiting: boolean = false;
   requestlineInfo: number;
   rid: number;
+  page: string;
 
   constructor(
     private syssvc: SystemService,
@@ -40,6 +41,7 @@ export class ProductListComponent implements OnInit {
   //  }
 
   isAdmin(): boolean {
+    console.log("isAdmin", this.syssvc.isAdmin());
     return this.syssvc.isAdmin();
   }
 
@@ -52,9 +54,15 @@ export class ProductListComponent implements OnInit {
     this.requestlineInfo = pid;
   }
 
+  isListPage(): boolean {
+    return (this.page === '/product/list');
+  }
+
   ngOnInit(): void {
     this.rid = this.route.snapshot.params.id;
     this.syssvc.verifyLogin();
+    this.page = this.router.url;
+    console.log("url:", this.page);
     this.waiting = !this.waiting;
     this.service.list()
       .subscribe(
@@ -71,9 +79,11 @@ export class ProductListComponent implements OnInit {
   }
 
   open(pid: number) {
-    this.requestlinesvc.setRlPid(pid);
-    const modalRef = this.modalService.open(RequestlineDetailComponent);
-    modalRef.componentInstance.productId = pid;
+    if (!this.isListPage()) {
+      this.requestlinesvc.setRlPid(pid);
+      const modalRef = this.modalService.open(RequestlineDetailComponent);
+      modalRef.componentInstance.productId = pid;
+    }
   }
 
 }

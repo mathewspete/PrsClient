@@ -7,7 +7,7 @@
         <tr>
           <th>Id</th>
           <th>Description</th>
-          <th *ngIf="showVerify">Rejection Reason</th>
+          <th *ngIf="showReason">Rejection Reason</th>
           <th>Status</th>
           <th>Total</th>
           <th>User</th>
@@ -18,7 +18,7 @@
         <tr>
           <td>{{request.id}}</td>
           <td>{{request.description}}</td>
-          <td *ngIf="showVerify">
+          <td *ngIf="showReason">
             <input [(ngModel)]="request.rejectionReason" type="text" class="form-control form-control-dark w-100"
               id="reason">
           </td>
@@ -36,10 +36,10 @@
                   add_task
                 </span></button>
               <button type="button" class="btn btn-danger btn-sm" (click)="toggleReason()"
-                *ngIf="!showVerify && (isReviewer)">Reject<span class="material-icons md-18">
+                *ngIf="!showReason && (isReviewer && !isOwner)">Reject<span class="material-icons md-18">
                   thumb_down_alt
                 </span></button>
-              <button type="button" class="btn btn-danger btn-sm" (click)="reject()" *ngIf="showVerify">Confirm
+              <button type="button" class="btn btn-danger btn-sm" (click)="reject()" *ngIf="showReason">Confirm
                 Reject<span class="material-icons md-18">
                   thumb_down
                 </span></button>

@@ -27,11 +27,11 @@
           </tr>
           <tr>
             <th>Email</th>
-            <td><input [(ngModel)]="user.email" type="text"></td>
+            <td><input [(ngModel)]="user.email" type="email"></td>
           </tr>
           <tr>
             <th>Phone</th>
-            <td><input [(ngModel)]="user.phone" type="text"></td>
+            <td><input [(ngModel)]="user.phone" type="tel"></td>
           </tr>
           <tr>
             <th>Reviewer</th>
@@ -45,10 +45,12 @@
       </table>
       <div class="flex">
         <span>
-          <button *ngIf="isAdmin()" (click)="save()" class="btn btn-primary float-right">Save<span
-              class="material-icons md-18">
+          <button *ngIf="isAdmin()" (click)="save()" class="btn btn-primary float-right">
+            Save
+            <span class="material-icons md-18">
               save
-            </span></button>
+            </span>
+          </button>
         </span>
       </div>
     </div>

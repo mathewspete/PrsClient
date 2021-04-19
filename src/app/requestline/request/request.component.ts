@@ -39,8 +39,6 @@ export class RequestComponent implements OnInit {
   id: number = 0;
   showVerify: boolean = false;
   users: User[];
-  isAdmin: boolean = false;
-  isReviewer: boolean = false;
   isOwner: boolean = false;
   waiting: boolean = false;
   waitingRl: boolean = false;
@@ -57,6 +55,16 @@ export class RequestComponent implements OnInit {
 
   isApproved(): boolean {
     return this.request.status === "APPROVED";
+  }
+
+  isAdmin(): boolean {
+    console.log("isAdmin", this.syssvc.isAdmin());
+    return this.syssvc.isAdmin();
+  }
+
+  isReviewer(): boolean {
+    console.log("isAdmin", this.syssvc.isReviewer());
+    return this.syssvc.isReviewer();
   }
 
 
@@ -91,7 +99,6 @@ export class RequestComponent implements OnInit {
   ngOnInit(): void {
     this.waitingRl = !this.waitingRl;
     this.id = +this.route.snapshot.params.id;
-    ///this.isOwner = (this.syssvc.loggedInUser.id === this.request.userId); /// probably need @input
     this.requestlinesvc.getByRequestID(this.id).subscribe(
       res => {
         this.waitingRl = !this.waitingRl;
